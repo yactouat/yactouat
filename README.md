@@ -14,3 +14,12 @@ Here are some ideas to get you started:
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
 -->
+
+Developer driven by curiosity, positivity, and a can-do attitude; I like to code full stack projects with various technologies, my objective is to help your organization meet its challenges with ease !
+
+I can work with:
+- PHP / Laravel
+- MERN stack
+- SQL
+- Docker / Kubernetes
+- Google Cloud Platform
