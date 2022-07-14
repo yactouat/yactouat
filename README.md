@@ -1,4 +1,6 @@
-### Hi there 👋
+
+I'm a generalist web developer who is driven by curiosity, positivity, and a can-do attitude; I like to code full stack projects with various technologies, my objective is to help your organization meet its challenges with ease !
+So, please, dont hesitate to DM me ;)
 
 <!--
 **yactouat/yactouat** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
@@ -14,12 +16,3 @@ Here are some ideas to get you started:
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
 -->
-
-I'm Yacine, Developer driven by curiosity, positivity, and a can-do attitude; I like to code full stack projects with various technologies, my objective is to help your organization meet its challenges with ease !
-
-I like to work with:
-- PHP / Laravel
-- MERN stack
-- SQL
-- Docker / Kubernetes
-- Google Cloud Platform
