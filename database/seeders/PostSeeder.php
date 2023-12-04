@@ -122,6 +122,9 @@ class PostSeeder extends Seeder
         $subscribers = User::where('notify_on_blog_post', true)->get();
         // send email to subscribers
         $subscribers->each(function ($subscriber) use ($lastPost) {
+            if($lastPost == null) {
+                return;
+            }
             $signedRouteService = resolve('SignedRouteService');
             $unsubscribeUrl = $signedRouteService->persist($subscriber->id, 'unsubscribe-from-emails');
             $authedUrl = $signedRouteService->persist($subscriber->id, 'post', 'post', $lastPost->slug);
