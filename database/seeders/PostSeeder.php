@@ -2,13 +2,16 @@
 
 namespace Database\Seeders;
 
+use App\Mail\PostAuthored;
 use App\Models\Post;
 use App\Models\Tag;
+use App\Models\User;
 use App\Services\PostMarkdownProcessorService;
 use App\Services\RemoteUrlService;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class PostSeeder extends Seeder
@@ -21,8 +24,19 @@ class PostSeeder extends Seeder
      */
     public function run(): void
     {
-        collect(File::files(base_path('content/posts')))
+        // get authored posts that are in disk
+        $authoredPosts = collect(File::files(base_path('content/posts')))
             ->map(function ($file) {
+                $mdFileName = $file->getFilename();
+                $slug = str_replace('.md', '', $mdFileName);
+                return $slug;
+            });
+        // get all posts from db
+        $postsInDb = Post::all();
+        // initialize a new posts collection
+        $newPosts = collect([]);
+        collect(File::files(base_path('content/posts')))
+            ->map(function ($file) use ($newPosts) {
                 $mdFileContents = $file->getContents();
                 $mdFileName = $file->getFilename();
                 $postData = PostMarkdownProcessorService::getPostFromMdFile($mdFileContents, $mdFileName);
@@ -35,7 +49,8 @@ class PostSeeder extends Seeder
                 $postInDb = Post::where('slug', $postToSave->slug)->first();
                 $postHasChanged = false;
                 $postExists = $postInDb != null;
-                if($postExists) {
+                if($postExists) 
+                {
                     // if exists check if has changed
                     $postHasChanged = $postToSave->body !== $postInDb->body || $postToSave->excerpt !== $postInDb->excerpt || $postToSave->title !== $postInDb->title;
                 }
@@ -86,16 +101,12 @@ class PostSeeder extends Seeder
                     });
                     $postInDb->updated_at = now();
                     $postInDb->save();
+                    if(!$postExists)
+                    {
+                        // add to new posts collection
+                        $newPosts->push($postInDb);
+                    }
                 }
-            });
-        // get all posts from db
-        $postsInDb = Post::all();
-        // get currently authored posts
-        $authoredPosts = collect(File::files(base_path('content/posts')))
-            ->map(function ($file) {
-                $mdFileName = $file->getFilename();
-                $slug = str_replace('.md', '', $mdFileName);
-                return $slug;
             });
         // get db posts that are no longer authored
         $noLongerAuthored = $postsInDb->filter(function ($post) use ($authoredPosts) {
@@ -104,6 +115,24 @@ class PostSeeder extends Seeder
         // delete posts that are no longer authored
         $noLongerAuthored->each(function ($post) {
             $post->delete();
+        });
+        // get last of new posts
+        $lastPost = $newPosts->sortByDesc('created_at')->first();
+        // get users who are subscribed to new posts notifications
+        $subscribers = User::where('notify_on_blog_post', true)->get();
+        // send email to subscribers
+        $subscribers->each(function ($subscriber) use ($lastPost) {
+            $signedRouteService = resolve('SignedRouteService');
+            $unsubscribeUrl = $signedRouteService->persist($subscriber->id, 'unsubscribe-from-emails');
+            $authedUrl = $signedRouteService->persist($subscriber->id, 'post', 'post', $lastPost->slug);
+            Mail::mailer('sendgrid')->to($subscriber->email)->send(
+                new PostAuthored(
+                    $unsubscribeUrl,
+                    $subscriber,
+                    $lastPost,
+                    $authedUrl
+                )
+            );
         });
     }
 }

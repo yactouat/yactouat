@@ -2,23 +2,28 @@
 
 namespace App\Mail;
 
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class UserWelcomed extends Mailable
+class PostAuthored extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(public User $user, public string $unsubscribeUrl)
+    public function __construct(
+        public string $unsubscribeUrl, 
+        public User $user, 
+        public Post $post,
+        public string $authedUrl
+    )
     {
         //
     }
@@ -29,11 +34,7 @@ class UserWelcomed extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: config('mail.from.address'),
-            replyTo: [
-                new Address(config('mail.reply_to.address'), config('mail.reply_to.name')),
-            ],
-            subject: 'welcome to yactouat.com',
+            subject: 'post Authored',
         );
     }
 
@@ -43,7 +44,7 @@ class UserWelcomed extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'emails.registration.welcome',
+            markdown: 'emails.post.authored',
         );
     }
 

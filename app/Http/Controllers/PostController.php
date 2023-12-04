@@ -31,6 +31,12 @@ class PostController extends Controller
         if (!$post) {
             abort(404);
         }
+        // check if instance of signed route
+        $signedRouteService = resolve('SignedRouteService');
+        $persistedSignedRoute = $signedRouteService->fetch(request());
+        if($persistedSignedRoute) {
+            $signedRouteService->consume($persistedSignedRoute);
+        }
         $cachedPost = Cache::rememberForever("posts.{$post->slug}", function () use ($post) {
             return $post->load(['tags', 'author']);
         });

@@ -7,6 +7,7 @@ use App\Mail\UserSubscribed;
 use App\Mail\UserWelcomed;
 use App\Models\User;
 use App\Services\NewsletterService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
@@ -29,7 +30,9 @@ class UserController extends Controller
 
     public function edit()
     {
-        return view('user.edit');
+        return view('user.edit',[
+            'user' => auth()->user(),
+        ]);
     }
 
     public function login() 
@@ -115,12 +118,32 @@ class UserController extends Controller
 
         auth()->login($user);
 
-        Mail::mailer('sendgrid')->to($email)->send(new UserWelcomed($user));
+        // issue a signed route and save it to db (for unsubscribe link)
+        $unsubscribeUrl = resolve('SignedRouteService')->persist($user->id, 'unsubscribe-from-emails');
+
+        // notify user and admin
+        Mail::mailer('sendgrid')->to($email)->send(new UserWelcomed($user, $unsubscribeUrl));
         Mail::mailer('sendgrid')->to(config('mail.reply_to.address'))->send(new UserRegistered($user));
         
+        // redirect to home
         session()->flash('user.create.success', 'welcome to yactouat.com!');
-
         return redirect('/');
+    }
+
+    public function unsubscribeFromEmails(Request $request)
+    {
+        // get signed route from db
+        $signedRouteService = resolve('SignedRouteService');
+        $persistedSignedRoute = $signedRouteService->fetch($request);
+        if(!$persistedSignedRoute) {
+            abort(401);
+        }
+
+        $signedRouteService->consume($persistedSignedRoute);
+
+        return view('user.edit', [
+            'user' => auth()->user(),
+        ]);
     }
 
     public function update()
@@ -128,12 +151,13 @@ class UserController extends Controller
         // this redirects back to the form if validation fails
         $password = request('password');
         request()->validate([
-            'password' => 'required|min:8|max:255'
+            'password' => 'nullable|min:8|max:255'
         ]);
 
         $user = User::where('id', auth()->user()->id)->first();
 
-        $user->password = $password;
+        $user->password = $password ?? $user->password;
+        $user->notify_on_blog_post = request('notify_on_blog_post') ? true : false;
 
         $user->save();
 

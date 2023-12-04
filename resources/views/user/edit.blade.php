@@ -10,16 +10,25 @@
             <!-- update account section -->
             <div class="bg-white rounded px-4 pt-6 pb-8 mb-4">
                 <h2 class="text-center font-bold text-xl">update profile data</h2>
-                <form method="post" action="/update-profile" class="bg-white rounded px-4 pt-6 pb-8 mb-4 mt-10">
+                <form method="post" action="/update-profile" class="bg-white rounded px-4 pt-6 pb-8 mb-4 mt-10 space-y-4">
                     @csrf
                     @method('PATCH')
                     <x-form-password-input 
                         autocomplete="new-password" 
                         name="password"
-                        placeholder="enter your new password" 
-                        required="{{ true }}" 
+                        placeholder="****" 
                     />
-                    <div class="flex items-center justify-between">
+                    <small class="text-gray-500">leave blank to keep current password</small>
+                    <div class="flex items-center">
+                        <label for="notify_on_blog_post" class="mr-2">be notified on new blog post</label>
+                        <input
+                            id="notify_on_blog_post"
+                            name="notify_on_blog_post"
+                            type="checkbox"  
+                            {{ $user->notify_on_blog_post ? 'checked' : '' }}
+                        >
+                    </div>
+                    <div class="flex items-center">
                         <x-button
                             type="submit"
                         >
@@ -49,6 +58,7 @@
                     </div>
                 </form>
             </div>
+
         </x-panel>
     </section>
 @endsection

@@ -37,8 +37,10 @@ Route::middleware('guest')->group(function() {
     Route::get('register', [UserController::class, 'create'])->middleware('guest');
     Route::post('register', [UserController::class, 'store'])->middleware('guest');
 });
+Route::get('unsubscribe-from-emails', [UserController::class, 'unsubscribeFromEmails'])
+    ->name('unsubscribe-from-emails');
 
-// messages
+// messages and emails
 Route::post('contact', [MessageController::class, 'store'])->middleware('auth');
 
 // posts

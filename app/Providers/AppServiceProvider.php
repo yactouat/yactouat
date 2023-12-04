@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Mail\SendGridTransport;
 use App\Models\User;
 use App\Services\SendGridMailerService;
+use App\Services\SignedRouteService;
 use Google\Cloud\Storage\StorageClient;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Filesystem\FilesystemAdapter;
@@ -24,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         // example of how to add something to the container
-        // app()->bind('example', fn() => new Example());
+        app()->bind('SignedRouteService', fn() => new SignedRouteService());
     }
 
     /**

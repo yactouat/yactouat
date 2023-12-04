@@ -1,3 +1,5 @@
+@props(['unsubscribeUrl' => null])
+
 <x-mail::layout>
 {{-- Header --}}
 <x-slot:header>
@@ -22,6 +24,10 @@
 <x-slot:footer>
 <x-mail::footer>
 © {{ date('Y') }} {{ config('app.name') }}. @lang('all rights reserved.')
+@if($unsubscribeUrl)
+    <br>
+    <a href="{{ urldecode($unsubscribeUrl) }}" class="text-gray-500 hover:text-black">unsubscribe from emails</a>
+@endif
 </x-mail::footer>
 </x-slot:footer>
 </x-mail::layout>

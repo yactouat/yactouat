@@ -16,15 +16,16 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $adminUserExists = User::where('email', env('ADMIN_EMAIL'))->exists();
-        if ($adminUserExists) {
-            return;
+        $user = User::where('email', env('ADMIN_EMAIL'))->first();
+        if (!$user) {
+            $user = new User();
+            $user->email = env('ADMIN_EMAIL');
+            $user->name = env('ADMIN_NAME');
+            $user->password = bcrypt(env('ADMIN_PASSWORD'));
+            $user->username = strtolower(str_replace(' ', '-', env('ADMIN_NAME')));
         }
-        $user = new User();
-        $user->email = env('ADMIN_EMAIL');
-        $user->name = env('ADMIN_NAME');
-        $user->password = bcrypt(env('ADMIN_PASSWORD'));
-        $user->username = strtolower(str_replace(' ', '-', env('ADMIN_NAME')));
+        // no need to notify admin on blog post written
+        $user->notify_on_blog_post = false;
         $user->save();
     }
 }
