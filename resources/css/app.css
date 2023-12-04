@@ -1,0 +1,35 @@
+@import './toast-message.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    scroll-behavior: smooth;
+}
+
+.nav-auth {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+.nav-auth > * {
+    margin: 0.5rem 0;
+}
+.nav-auth a {
+    align-items: center;
+    display: flex;
+}
+.nav-auth span {
+    text-align: right;
+    width: 70px;
+}
+
+.article-height {
+    min-height: 65vh;
+}
+
+.post-comments {
+    align-items: end;
+}

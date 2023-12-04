@@ -1,0 +1,45 @@
+services:
+
+  cache:
+    image: redis:7.2.1
+    restart: always
+    ports:
+      - 6379:6379
+
+  cache-gui:
+    image: redislabs/redisinsight:1.14.0
+    restart: always
+    ports:
+      - 8001:8001
+
+  database:
+    image: postgres:15.1
+    restart: always
+    environment:
+      POSTGRES_DB: yactouat
+      POSTGRES_PASSWORD: yactouat
+      POSTGRES_USER: yactouat
+    ports:
+      - 5432:5432
+
+  pgadmin:
+    image: dpage/pgadmin4:8.0
+    environment:
+      PGADMIN_DEFAULT_EMAIL: yactouat@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: yactouat
+    ports:
+      - "8080:80"
+
+  php-apache:
+    build:
+      context: .
+      dockerfile: ./Docker/local.php-apache.Dockerfile
+    restart: unless-stopped
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+      - /var/www/html/vendor
+    ports:
+      - 80:80
+    environment:
+      APP_ENV: development

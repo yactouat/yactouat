@@ -1,0 +1,31 @@
+{
+    "BRAND_COLOR": "#333",
+    "BRAND_HELLO": "👋 I'm Yacine. I'm a software developer.",
+    "BRAND_NAME": "yactouat.com",
+    "BRAND_PROFILE_PIC": "https://avatars.githubusercontent.com/yactouat",
+    "CURRENT_JOBS": [
+        {
+            "COMPANY": "Reboot Conseil",
+            "END_DATE": null,
+            "LOCATION": "Strasbourg, France",
+            "START_DATE": "2023-01-01T00:00:00Z",
+            "TITLE": "IT consultant",
+            "TYPE": "Full-time",
+            "WEBSITE": "https://reboot-conseil.com"
+        },
+        {
+            "COMPANY": "OpenClassrooms",
+            "END_DATE": null,
+            "LOCATION": null,
+            "START_DATE": "2021-08-01T00:00:00Z",
+            "TITLE": "Dev web mentor",
+            "TYPE": "Contract",
+            "WEBSITE": "https://openclassrooms.com/"
+        }
+    ],
+    "LIKES": [
+        "AI",
+        "software engineering",
+        "tech in general"
+    ]
+}

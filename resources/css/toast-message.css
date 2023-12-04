@@ -1,0 +1,41 @@
+.toast-message {
+    background-color: #333;
+    border-radius: 4px;
+    box-shadow: 4px 2px 5px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    right: 50%;
+    margin-right: -125px; /* divide value of min-width by 2 */
+    min-width: 250px;
+    padding: 16px;
+    position: fixed;
+    text-align: center;
+    top: 30px; 
+    visibility: hidden; /* hidden by default */
+    z-index: 1;
+}
+
+@-webkit-keyframes fadein {
+    from {top: 0; opacity: 0;} 
+    to {top: 30px; opacity: 1;}
+}
+  
+@keyframes fadein {
+    from {top: 0; opacity: 0;}
+    to {top: 30px; opacity: 1;}
+}
+  
+@-webkit-keyframes fadeout {
+    from {top: 30px; opacity: 1;} 
+    to {top: 0; opacity: 0;}
+}
+  
+@keyframes fadeout {
+    from {top: 30px; opacity: 1;}
+    to {top: 0; opacity: 0;}
+}
+
+.show-toast-message {
+    -webkit-animation: fadein 0.5s forwards, fadeout 0.5s 2.5s forwards;
+    animation: fadein 0.5s forwards, fadeout 0.5s 2.5s forwards;
+    visibility: visible;
+}
