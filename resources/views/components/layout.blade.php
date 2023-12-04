@@ -29,24 +29,7 @@
             <!-- <h2 class="inline-flex mt-2">By Lary Laracore <img src="/images/lary-head.svg"
                                                                 alt="Head of Lary the mascot"></h2> -->
             
-            <section class="max-w-6xl mx-auto px-6 py-8">
-                <div class="text-center">
-                    <p class="text-gray-600 mb-6">by Yacine Touati, IT consultant / web development mentor</p>
-                </div>
-
-                <div class="mb-8">
-                    <p class="text-gray-600">I'm a generalist software developer who is driven by curiosity, positivity, and a can-do attitude; I like to design full stack solutions with various technologies, my objective is to solve problems with code</p>
-                </div>
-
-                <div class="text-center mb-8">
-                    <h3 class="text-3xl font-semibold mb-4">contact me</h3>
-                    <p class="text-gray-600">have questions? <x-link href="#app-contact">get in touch!</x-link></p>
-                </div>
-
-                <div class="text-center">
-                    <p class="text-gray-600">in the meanwhile, please do browse my content! it is regulary updated</p>
-                </div>
-            </section>
+            @yield('header')
 
             @yield('filters')
 
