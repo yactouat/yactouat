@@ -57,7 +57,7 @@
                 {{ $post->title }}
             </h1>
 
-            <section class="space-y-4 lg:text-lg leading-loose">
+            <section class="space-y-4 lg:text-lg leading-loose" id="post-body">
                 {!! $post->body !!}
             </section>
         </div>
