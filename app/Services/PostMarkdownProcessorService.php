@@ -18,6 +18,8 @@ final class PostMarkdownProcessorService
         $tags = collect(isset($md['meta']['tags']) ? $md['meta']['tags']: []);
         // checking if all required attributes exist
         $body = $md['content'];
+        // post process all links so that they have target blank
+        $body = str_replace('<a ', '<a target="_blank" ', $body);
         if(
             !isset($md['meta']['excerpt']) || !isset($md['meta']['title'])
             || count($tags) === 0 || trim($body) === ''
