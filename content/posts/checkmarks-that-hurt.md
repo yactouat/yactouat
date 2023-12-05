@@ -1,39 +1,45 @@
 ---
-excerpt: Sometimes, "simple features" just go wrong and you explode any estimates you reasonably issued before working on the actual task. How come we always get it wrong? For this particular case, I might have an answer.
+excerpt: Sometimes, "simple features" just go wrong and you explode any estimates you reasonably issued before working on the given task. How come we always get it wrong? For this particular case, I might have an answer.
 tags: [dev-life, laravel]
 thumbnail_img: checkmarks_that_hurt.png
 title: checkmarks that hurt
 ---
 
-I'm quite happy because, as it happens, I managed to stay consistent on day 2 of my blog release and on my commitment to ship something every day.
+Today I'm quite happy because, as it happens, I managed to stay consistent on day 2 of my blog release and on my commitment to ship something every day.
 
-Today: I shipped 3 items of [this blog's GitHub issue](https://github.com/yactouat/yactouat/issues/26):
+Today: I almost shipped 3 items of [this blog's GitHub issue](https://github.com/yactouat/yactouat/issues/26):
 
 - [x] user should be able to subscribe/unsubscribe from emails from an email link
-- [x] user should be able to subscribe/unsubscribe from emails from his profile page
+- [x] user should be able to subscribe/unsubscribe from emails from his profile page (for some reason I have a 401 on prod, so I'm gonna tackle this next)
 - [x] user should be notified on a new post
 
-3 little checkmarks... they took me like 4 hours to complete. I'm not even kidding. Once again I'm going to sleep late. But yet I maintain that I'm happy, I think unlocking the "ship it" mindset is a great achievement and that it will add great value to my skillset.
+3 little checkmarks... they took me like 4 hours to complete. I'm not even kidding. Once again I'm going to sleep late. But yet I maintain that I'm happy, I think unlocking the "ship it" mindset is a great achievement and that it will add great value to my skillset. This type of grind really helps learning stuff and get good reflexes in my craft.
 
 So why was it so hard you might say?
 
-## The root of my own personal evil: doing everything at the same time
+## TL;DR: I tried to do several things at the same time
 
 I'm talking about[this commit](https://github.com/yactouat/yactouat/commit/529e01060cbc538c5db21e9ba40c7d4109e469f8). My initial thought was "hey let's just notify the user when a new post is created". With Laravel mailables, it's laughibly simple to wire such logic. But, as I was executing this task, a lingering thought trapped me into the ship late loop: "users (e.g. my girlfriend) will think I'm a spammer if I send an email at each new blog post without giving them the option to unsubscribe".
 
-UX is a bitch, once you start thinking about your users, you end up with a good product but everything becomes harder.
+So, I decided to ship the unsubscribe feature at the same time. I thought it would be easy, but it wasn't. I had to learn a lot of stuff, and I'm not even sure I'm doing it right. UX is a bitch, once you start thinking about your users, you may end up with a good product; but let's face it, it comes with a cost: everything becomes waaaay harder.
 
-In order to create the `unsubscribe` link, I had to / learned:
+Here are some examples of what I had to do/learn for this `unsubscribe` link:
 
 - modify some emails HTML layout to pass an `$unsubscribeUrl` variable
 - create [a Laravel signed url](https://laravel.com/docs/10.x/urls#signed-urls) to create the link
-- but then again how to make sure that the incoming request is a signed URL?
-- also how to make sure that this URL actually belongs to a given user?
-- moreover, I realized it was necessary to log the user in when he goes to the unsubscribe link (since he may not be signed in at all)
-- this caused a security issue as anyone who gets the link a second time to access the user's account
-- Laravel does not ship with the ability to revoke signed urls by default, so I had to create a layer of persistence for such urls with a `revoked` attribute
-- what's funny is that the same URL is generated over and over again, the signature hash is idempotent; how come? I think the extreme modularity of the framework causes this kind of discrepancy between places where `bcrypt` is used by default and places where it's not when it should be IMHO (e.g. signed urls)
-- knowing that I had to do something quite dirty: manually deleting the previous signed urls when a new one is generated, anyway, let's stop rambling, let me show you my signed route persistence layer; it's messy but hey it works 🤷 =>
+- find a way to make sure that the incoming request is actually a signed URL
+- make sure that a given URL belongs to a certain user
+- log the user in when he/she clicks on the link to go to profile page to update the notifications setting of his/hers account
+- create the form and the data structure of the account's notifications setting
+- revoke the unsubscribe link once it is used (Laravel does not ship with that feature)
+- implement the persistence layer for these signed routes that would make this possible
+- account for the fact that the same hash is always generated for a given URL (e.g. the signature is idempotent), this means the signature itself is not good enough to identify an action
+- parse encoded URLs to get the signature query parameter (this was quite dirty but hey it works 🤷)
+- etc.
+
+And I'm sure I missed items in this list!
+
+To end this post, let me show you my signed route persistence layer; it's messy but functional =>
 
 ```php
 <?php
