@@ -64,6 +64,7 @@ Route::get('test-end', function (Request $request) {
 
         // get params from signed route
         $parsed = parse_url($request->fullUrl());
+        dd($parsed);
         parse_str($parsed['query'], $queryParameters);
         // it's a dirty job but someone's gotta do it
         $signature = $queryParameters["amp;signature"];
