@@ -7,11 +7,11 @@
 @endsection
 
 @section('content')
-    <article class="max-w-4xl mx-auto lg:grid lg:grid-cols-12 gap-x-10 article-height">
-        <div class="col-span-4 lg:text-center lg:pt-14 mb-10">
-            <img src="{{ $post->thumbnail_img }}" alt="" class="rounded-xl">
+    <article class="max-full mx-auto lg:grid lg:grid-cols-12 gap-x-10 article-height">
+        <div class="col-span-12">
+            <img src="{{ $post->thumbnail_img }}" alt="" class="rounded-xl w-96 h-96 mx-auto">
 
-            <p class="mt-4 block text-gray-500 text-xs">
+            <p class="mt-4 block text-gray-500 text-xs text-center">
                 last updated <time>{{ $post->updated_at->diffForHumans() }}</time>
             </p>
 
@@ -24,9 +24,6 @@
                     <!-- <h6>Mascot at Laracasts</h6> -->
                 </div>
             </div>
-        </div>
-
-        <div class="col-span-8">
             <div class="hidden lg:flex justify-between mb-6">
                 <x-link
                     href="/"

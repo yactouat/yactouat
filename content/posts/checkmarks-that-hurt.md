@@ -91,7 +91,7 @@ final class SignedRouteService
             $parsed = parse_url($request->fullUrl());
             parse_str($parsed['query'], $queryParameters);
             // it's a dirty job but someone's gotta do it
-            $signature = $queryParameters["amp;signature"];
+            $signature = $queryParameters["signature"] ?? $queryParameters["amp;signature"];
             $persistedSignedRoute = DB::table('persisted_signed_routes')
                 ->where('user_id', $request->user)
                 ->where('signature', $signature)

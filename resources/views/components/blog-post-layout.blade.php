@@ -7,6 +7,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/71848dd692.js" crossorigin="anonymous"></script>
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/php.min.js"></script>
+    <!-- application styles -->
     @vite('resources/css/app.css')
 </head>
 
@@ -25,5 +30,7 @@
     @vite('resources/js/app.js')
 
     @include('partials._toasts')
+
+    <script>hljs.highlightAll();</script>
 
 </body>
