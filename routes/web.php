@@ -6,6 +6,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AllowsOnlyAdmin;
 use App\Mail\UserRegistered;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,7 +49,23 @@ Route::get('posts/{post:slug}', [PostController::class, 'show'])->name('post');
 Route::post('posts/{post:slug}/comments', [PostCommentsController::class, 'store'])->name('post.comments')->middleware('auth');
 
 // tests
-// Route::get('test', function () {
-//     $user = auth()->user();
-//     return new UserRegistered($user);
-// })->middleware(AllowsOnlyAdmin::class);
+Route::get('test-start', function (Request $request) {
+    
+    $unsubscribeUrl = resolve('SignedRouteService')->persist('1', 'unsubscribe-from-emails');
+    dd($unsubscribeUrl);
+
+})->middleware(AllowsOnlyAdmin::class);
+Route::get('test-end', function (Request $request) {
+    
+    // get signed route from db
+    $signedRouteService = resolve('SignedRouteService');
+    $persistedSignedRoute = $signedRouteService->fetch($request);
+
+    // get params from signed route
+    $parsed = parse_url($request->fullUrl());
+    parse_str($parsed['query'], $queryParameters);
+    // it's a dirty job but someone's gotta do it
+    $signature = $queryParameters["amp;signature"];
+
+    dd($persistedSignedRoute, $parsed, $queryParameters, $signature);
+})->middleware(AllowsOnlyAdmin::class);
