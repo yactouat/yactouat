@@ -49,28 +49,27 @@ Route::get('posts/{post:slug}', [PostController::class, 'show'])->name('post');
 Route::post('posts/{post:slug}/comments', [PostCommentsController::class, 'store'])->name('post.comments')->middleware('auth');
 
 // tests
-Route::get('test-start', function (Request $request) {
+// Route::get('test-start', function (Request $request) {
     
-    $unsubscribeUrl = resolve('SignedRouteService')->persist('1', 'test');
-    dd($unsubscribeUrl);
+//     $unsubscribeUrl = resolve('SignedRouteService')->persist('1', 'test');
+//     dd($unsubscribeUrl);
 
-})->middleware(AllowsOnlyAdmin::class);
-Route::get('test-end', function (Request $request) {
+// })->middleware(AllowsOnlyAdmin::class);
+// Route::get('test-end', function (Request $request) {
     
-    try {
-        // get signed route from db
-        $signedRouteService = resolve('SignedRouteService');
-        $persistedSignedRoute = $signedRouteService->fetch($request);
+//     try {
+//         // get signed route from db
+//         $signedRouteService = resolve('SignedRouteService');
+//         $persistedSignedRoute = $signedRouteService->fetch($request);
 
-        // get params from signed route
-        $parsed = parse_url($request->fullUrl());
-        parse_str($parsed['query'], $queryParameters);
-        // it's a dirty job but someone's gotta do it
-        $signature = $queryParameters["signature"];
+//         // get params from signed route
+//         $parsed = parse_url($request->fullUrl());
+//         parse_str($parsed['query'], $queryParameters);
+//         $signature = $queryParameters["signature"] ?? $queryParameters["amp;signature"];
 
-        dd($persistedSignedRoute, $parsed, $queryParameters, $signature);        
-    } catch (\Throwable $th) {
-        dd($th);
-    }
+//         dd($persistedSignedRoute, $parsed, $queryParameters, $signature);        
+//     } catch (\Throwable $th) {
+//         dd($th);
+//     }
 
-})->name('test')->middleware(AllowsOnlyAdmin::class);
+// })->name('test')->middleware(AllowsOnlyAdmin::class);
