@@ -16,19 +16,19 @@
                 </div>
 
                 <div class="mt-4">
-                    <h2 class="text-3xl">
+                    <h2 class="text-4xl">
                         <x-link href="/posts/{{ $post->slug }}">
                             {{ $post->title }}
                         </x-link>
                     </h2>
 
-                    <span class="mt-2 block text-gray-500 text-xs">
+                    <span class="mt-2 block text-gray-500 text-sm">
                         last updated <time>{{ $post->updated_at->diffForHumans() }}</time>
                     </span>
                 </div>
             </header>
 
-            <div class="text-sm mt-2 space-y-4">
+            <div class="text-2xl mt-2 space-y-4">
                 {{ $post->excerpt }}
             </div>
 

@@ -4,12 +4,12 @@
     {{ $attributes->merge(['class' => 'transition-colors duration-100 hover:bg-gray-200 border border-gray-400 border-opacity-0 hover:border-opacity-5 rounded-xl']) }}
 >
     <div class="py-6 px-5">
-        <div>
+        <div class="flex justify-center">
             <img 
-                src="{{ $post->thumbnail_img }}" 
-                alt="Blog Post illustration" 
+                alt="blog post illustration" 
                 class="rounded-xl" 
                 loading="lazy"
+                src="{{ $post->thumbnail_img }}" 
             >
         </div>
 
@@ -34,7 +34,11 @@
                 </div>
             </header>
 
-            <div class="text-sm mt-4 space-y-4 h-20 overflow-y-auto">
+            <div 
+                class="text-sm mt-4 space-y-4 h-20 overflow-y-auto"
+                data-simplebar
+                id="post-card-excerpt"
+            >
                 {{ $post->excerpt }}
             </div>
 

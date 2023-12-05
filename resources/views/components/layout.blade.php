@@ -4,11 +4,21 @@
     <title>yactouat.com | @yield('title')</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @vite('resources/css/app.css')
+     <!-- Google fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/71848dd692.js" crossorigin="anonymous"></script>
+    <!-- custom scrollbar -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.min.js"></script>
+    <!-- Alpine -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
+    <!-- application styles -->
+    @vite('resources/css/app.css')
 </head>
 
 <body style="font-family: Open Sans, sans-serif">
@@ -35,7 +45,7 @@
 
         </header>
 
-        <main class="max-w-6xl mx-auto mt-6 lg:mt-20 space-y-6 min-h-screen">
+        <main class="max-w-7xl mx-auto mt-6 lg:mt-20 space-y-6 min-h-screen">
             @yield('content')
         </main>
 
