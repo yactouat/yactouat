@@ -30,6 +30,12 @@ html {
     min-height: 65vh;
 }
 
+#post-body a {
+    color: gray;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
 #post-body ul {
     display: block;
     list-style-type: disc;

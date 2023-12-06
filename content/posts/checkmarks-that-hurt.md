@@ -19,7 +19,7 @@ So why was it so hard you might say?
 
 ## TL;DR: I tried to do several things at the same time
 
-I'm talking about[this commit](https://github.com/yactouat/yactouat/commit/529e01060cbc538c5db21e9ba40c7d4109e469f8). My initial thought was "hey let's just notify the user when a new post is created". With Laravel mailables, it's laughibly simple to wire such logic. But, as I was executing this task, a lingering thought trapped me into the ship late loop: "users (e.g. my girlfriend) will think I'm a spammer if I send an email at each new blog post without giving them the option to unsubscribe".
+I'm talking about [this commit](https://github.com/yactouat/yactouat/commit/529e01060cbc538c5db21e9ba40c7d4109e469f8). My initial thought was "hey let's just notify the user when a new post is created". With Laravel mailables, it's laughibly simple to wire such logic. But, as I was executing this task, a lingering thought trapped me into the ship late loop: "users (e.g. my girlfriend) will think I'm a spammer if I send an email at each new blog post without giving them the option to unsubscribe".
 
 So, I decided to ship the unsubscribe feature at the same time. I thought it would be easy, but it wasn't. I had to learn a lot of stuff, and I'm not even sure I'm doing it right. UX is a bitch, once you start thinking about your users, you may end up with a good product; but let's face it, it comes with a cost: everything becomes waaaay harder.
 
