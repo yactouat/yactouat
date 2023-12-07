@@ -9,19 +9,25 @@
 @section('content')
     <article class="max-full mx-auto lg:grid lg:grid-cols-12 gap-x-10 article-height">
         <div class="col-span-12">
-            <img 
-                alt="main blog post illustration" 
-                id="post-thumbnail"
-                src="{{ $post->thumbnail_img }}" >
+            <div
+                class="flex flex-col justify-center items-center"
+            >
+                <img 
+                    alt="{{ $post->thumbnail_img_alt }}" 
+                    id="post-thumbnail"
+                    src="{{ $post->thumbnail_img }}" >
+                @if($post->thumbnail_ai_generated)
+                    <x-ai-generated-illustration />
+                @endif
+                <p class="block text-gray-500 text-xs text-center self-start">
+                    last updated <time>{{ $post->updated_at->diffForHumans() }}</time>
+                </p>        
+            </div>
 
-            <p class="mt-4 block text-gray-500 text-xs text-center">
-                last updated <time>{{ $post->updated_at->diffForHumans() }}</time>
-            </p>
-
-            <div class="flex items-center lg:justify-center text-sm mt-4">
+            <div class="flex items-center lg:justify-start text-sm my-4">
                 <!-- TODO implement profile pic -->
                 <!-- <img src="/images/lary-avatar.svg" alt="Lary avatar"> -->
-                <div class="ml-3 text-left">
+                <div class="text-left my-2">
                     <h5 class="font-bold">by <x-link href="/?author={{ $post->author->username }}">{{ $post->author->name }}</x-link></h5>
                     <!-- TODO implement user public title -->
                     <!-- <h6>Mascot at Laracasts</h6> -->
@@ -46,9 +52,7 @@
                 </x-link>
 
                 <div class="space-x-2">
-                    @foreach ($tags as $tag)
-                        <x-tag-link :tag="$tag" />
-                    @endforeach
+                    <x-tag-links :tags="$post->tags" />
                 </div>
 
             </div>

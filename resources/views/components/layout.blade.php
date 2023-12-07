@@ -27,9 +27,12 @@
     <section class="px-6 py-8">
 
         <header class="max-w-xl mx-auto mt-12 text-center">
-            <div class="flex justify-center">
-                <div class="rounded-full bg-gray-200 w-32 h-32 flex items-center justify-center">
-                    <img src="/logo.png" alt="Logo" class="w-32 h-32">
+            <div class="flex flex-col justify-center items-center">
+                <div class="rounded-full bg-gray-200 w-32 h-32 flex flex-col items-center justify-center">
+                    <img 
+                        alt="yactouat.comm logo (ai generated image content)"
+                        src="/logo.png"  
+                        class="w-32 h-32">
                 </div>
             </div>
             <h1 class="text-4xl">

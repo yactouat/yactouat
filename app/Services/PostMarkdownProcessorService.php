@@ -45,7 +45,9 @@ final class PostMarkdownProcessorService
         $post->excerpt = $excerpt;
         $post->published_at = isset($md['meta']['published_at']) ? $md['meta']['published_at'] : null;
         $post->slug = $slug;
+        $post->thumbnail_ai_generated = isset($md['meta']['thumbnail_ai_generated']) ? $md['meta']['thumbnail_ai_generated'] : true;
         $post->thumbnail_img = isset($md['meta']['thumbnail_img']) ? $md['meta']['thumbnail_img'] : null;
+        $post->thumbnail_img_alt = isset($md['meta']['thumbnail_img_alt']) ? $md['meta']['thumbnail_img_alt'] : 'blog post illustration';
         $post->title = $title;
         $post->user_id = User::where('email', env('ADMIN_EMAIL'))->first()->id;
         return [

@@ -43,3 +43,6 @@ services:
       - 80:80
     environment:
       APP_ENV: development
+    depends_on:
+      - database
+      - cache

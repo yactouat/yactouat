@@ -87,6 +87,7 @@
                 @error('email')
                     <x-error-message>{{ $message }}</x-error-message>
                 @enderror
+                <x-ai-generated-illustration />
             </div>
         </div>
     @endauth

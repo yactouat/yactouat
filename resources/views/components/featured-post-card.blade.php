@@ -3,20 +3,25 @@
 <article
     class="transition-colors duration-100 hover:bg-gray-200 border border-gray-400 border-opacity-0 hover:border-opacity-5 rounded-xl">
     <div class="py-6 px-5 lg:flex">
-        <div class="flex-1 lg:mr-8">
-            <img src="{{ $post->thumbnail_img }}" alt="Blog Post illustration" class="rounded-xl" loading="lazy">
+        <div class="flex-1 lg:mr-8 flex-col justify-center items-center">
+            <img
+                alt="Blog Post illustration"
+                class="rounded-xl"
+                loading="lazy"
+                src="{{ $post->thumbnail_img }}">
+            @if($post->thumbnail_ai_generated)
+                <x-ai-generated-illustration />
+            @else
+                <p class="text-xs text-gray-500 my-2">{{ $post->thumbnail_img_alt }}</p>
+            @endif
         </div>
 
         <div class="flex-1 flex flex-col justify-between">
             <header class="mt-8 lg:mt-0">
-                <div class="space-x-2">
-                    @foreach ($post->tags as $tag)
-                        <x-tag-link :tag="$tag" />
-                    @endforeach
-                </div>
+                <x-tag-links :tags="$post->tags" />
 
                 <div class="mt-4">
-                    <h2 class="text-4xl">
+                    <h2 class="text-4xl max-md:text-xl">
                         <x-link href="/posts/{{ $post->slug }}">
                             {{ $post->title }}
                         </x-link>
@@ -41,7 +46,7 @@
                     </div>
                 </div>
 
-                <div class="hidden lg:block">
+                <div class="lg:block">
                     <x-link-button  href="/posts/{{ $post->slug }}">
                         read more
                     </x-link-button>

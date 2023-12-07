@@ -52,8 +52,22 @@ class PostSeeder extends Seeder
                 if($postExists) 
                 {
                     // if exists check if has changed
-                    $postHasChanged = $postToSave->body !== $postInDb->body || $postToSave->excerpt !== $postInDb->excerpt || 
-                        $postToSave->thumbnail_img != $postInDb->thumbnail_img || $postToSave->title !== $postInDb->title;
+                    $fields = [
+                        'body',
+                        'excerpt',
+                        'thumbnail_ai_generated',
+                        'thumbnail_img',
+                        'thumbnail_img_alt',
+                        'title'
+                    ];
+                    foreach($fields as $field) 
+                    {
+                        if($postToSave->{$field} !== $postInDb->{$field}) 
+                        {
+                            $postHasChanged = true;
+                            break;
+                        }
+                    }
                 }
                 // process tags
                 $tags = collect($postData['tags'])
@@ -67,6 +81,7 @@ class PostSeeder extends Seeder
                 {
                     return null;
                 }
+
                 // push thumbnail to storage
                 if($postToSave->thumbnail_img != null) 
                 {
@@ -81,6 +96,7 @@ class PostSeeder extends Seeder
                 {
                     $postToSave->thumbnail_img = "/images/blog-post-thumbnail-placeholder.png";
                 }
+
                 // first save without tags
                 if(!$postExists) {
                     $postToSave->save();
@@ -89,10 +105,13 @@ class PostSeeder extends Seeder
                     $postInDb->body = $postToSave->body;
                     $postInDb->excerpt = $postToSave->excerpt;
                     $postInDb->title = $postToSave->title;
+                    $postInDb->thumbnail_ai_generated = $postToSave->thumbnail_ai_generated;
                     $postInDb->thumbnail_img = $postToSave->thumbnail_img;
+                    $postInDb->thumbnail_img_alt = $postToSave->thumbnail_img_alt;
                     $postInDb->updated_at = now();
                     $postInDb->save();
                 }
+
                 // then save tags
                 if ($tagsHaveChanged) {
                     $postInDb = Post::where('slug', $postToSave->slug)->first();

@@ -7,6 +7,9 @@
 html {
     scroll-behavior: smooth;
 }
+#app-blog-post-body{
+    min-width: 100vw;
+}
 
 .nav-auth {
     align-items: center;
@@ -30,9 +33,12 @@ html {
     min-height: 65vh;
 }
 
+.post-card-thumbnail-wrapper {
+    height: 400px;
+}
+
 .post-card-thumbnail {
     height: 300px;
-    min-height: 300px;
     margin: 0 auto;
     object-fit: cover;
     width: 100%;
@@ -40,6 +46,13 @@ html {
 
 .post-card-content-wrapper {
     min-height: 350px;
+}
+.post-card-content-wrapper header {
+    height: 50%;
+}
+
+.post-card-excerpt {
+    height: 100px;
 }
 
 #post-thumbnail {

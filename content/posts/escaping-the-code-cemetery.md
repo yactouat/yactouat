@@ -1,7 +1,9 @@
 ---
 excerpt: Escaping the code cemetery is a hard thing to do. I've been trying to do this for years. Launching this blog is my latest attempt in that direction. Hope it will spark something nice! Following a ship-it mentality, I'm launching it with a simple post. I'll be improving this application and writing about my experiences as a software developer, and other things that I find interesting as I go along.
 tags: [dev-life]
+thumbnail_ai_generated: true
 thumbnail_img: code_cemetery.png
+thumbnail_img_alt: a gloomy graveyard with software-related artifacts such as monitors, keyboards, and mice
 title: escaping the code cemetery
 ---
 

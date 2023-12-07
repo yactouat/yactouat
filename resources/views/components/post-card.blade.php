@@ -1,27 +1,28 @@
 @props(['post'])
 
 <article
-    {{ $attributes->merge(['class' => 'transition-colors duration-100 hover:bg-gray-200 border border-gray-400 border-opacity-0 hover:border-opacity-5 rounded-xl']) }}
+    {{ $attributes->merge(['class' => 'transition-colors duration-100 hover:bg-gray-200 border border-gray-400 border-opacity-0 hover:border-opacity-5 rounded-xl post-card']) }}
 >
     <div class="py-6 px-5">
-        <div class="flex justify-center items-center h-2/4">
+        <div class="flex flex-col justify-center items-center post-card-thumbnail-wrapper">
             <img 
-                alt="blog post illustration" 
+                alt="{{ $post->thumbnail_img_alt }}" 
                 class="rounded-xl post-card-thumbnail"
                 loading="lazy"
                 src="{{ $post->thumbnail_img }}" 
             >
+            @if($post->thumbnail_ai_generated)
+                <x-ai-generated-illustration />
+            @else
+                <p class="text-xs text-gray-500 my-2 self-start">{{ $post->thumbnail_img_alt }}</p>
+            @endif
         </div>
 
         <div class="mt-4 flex flex-col justify-between h-2/4 post-card-content-wrapper">
-            <header class="h-1/3">
-                <div class="space-x-2 mt-2 h-1/3">
-                    @foreach ($post->tags as $tag)
-                        <x-tag-link :tag="$tag" />
-                    @endforeach
-                </div>
+            <header>
+                <x-tag-links :tags="$post->tags"/>
 
-                <div class="mt-4 h-2/3">
+                <div class="mt-4">
                     <h2 class="text-2xl">
                         <x-link href="/posts/{{ $post->slug }}">
                             {{ $post->title }}
@@ -35,13 +36,13 @@
             </header>
 
             <div 
-                class="text-md mt-4 space-y-4 h-1/3 overflow-y-auto post-card-excerpt"
+                class="text-md mt-4 space-y-4 overflow-y-auto post-card-excerpt"
                 data-simplebar
             >
                 {{ $post->excerpt }}
             </div>
 
-            <footer class="flex justify-between items-center mt-8 h-1/3 post-card-footer">
+            <footer class="flex justify-between items-center mt-8 post-card-footer">
                 <div class="flex items-center text-sm">
                     <!-- TODO implement profile pic -->
                     <!-- <img src="/images/lary-avatar.svg" alt="Lary avatar"> -->

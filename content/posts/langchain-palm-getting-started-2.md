@@ -1,7 +1,9 @@
 ---
 excerpt: I've been hearing about both Vertex and Langchain for months now, it's about time I test drive it! 🚘 This is the part 2 of this experiment, in which I play with chat interactions.
-tags: [AI-apis, LLMs, GCP, Vertex-AI, LangChain]
+tags: [AI-apis, LLMs, GCP, Vertex-AI, LangChain, agents]
+thumbnail_ai_generated: false
 thumbnail_img: langchain_palm.png
+thumbnail_img_alt: infographic showing the integration of LangChain and PaLM with Vertex AI
 title: getting started with LangChain and PaLM on Vertex AI (part 2)
 ---
 

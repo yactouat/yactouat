@@ -11,16 +11,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/php.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
     <!-- application styles -->
     @vite('resources/css/app.css')
 </head>
 
-<body style="font-family: Open Sans, sans-serif">
+<body style="font-family: Open Sans, sans-serif" class="w-full" id="app-blog-post-body">
     @include('partials._nav')
 
     <section class="px-6 py-8">
 
-        <main class="max-w-7xl mx-auto mt-10 lg:mt-20 space-y-6 min-h-screen">
+        <main class="max-w-7xl max-md:w-full mx-auto mt-10 lg:mt-20 space-y-6 min-h-screen">
             @yield('content')
         </main>
 

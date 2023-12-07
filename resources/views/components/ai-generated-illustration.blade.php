@@ -1,0 +1,1 @@
+<p class="text-xs text-gray-500 my-2 self-start">AI-generated image content</p>

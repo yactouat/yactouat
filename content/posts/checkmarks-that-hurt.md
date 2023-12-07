@@ -1,7 +1,9 @@
 ---
 excerpt: Sometimes, "simple features" just go wrong and you explode any estimates you reasonably issued before working on the given task. How come we always get it wrong? For this particular case, I might have an answer.
 tags: [dev-life, laravel]
+thumbnail_ai_generated: true
 thumbnail_img: checkmarks_that_hurt.png
+thumbnail_img_alt: a stressed developer who checked checkmarks todos but still looks unhappy
 title: checkmarks that hurt
 ---
 
