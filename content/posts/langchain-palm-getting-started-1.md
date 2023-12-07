@@ -50,17 +50,19 @@ The main building blocks of LangChain are:
 - **Agents**: these abstractions enable LLMs to communicate with their environment and to take a decision
 - **Chains**: they are series of actions that can be executed by an agent
 - **Modules**: they are specific function or capability, for instance a sentiment analysis tool
-- **Models**: they provide an interface to different type of AI models
+- **Models**: they provide an interface to different type of AI models, 3 models primitives are supported:
+    - **LLMs**
+    - **Chat Models**
+    - **Text Embedding Models**
 - **Prompts**: inputs to models, they are typically constructed from multiple components
     - interfaces to construct prompts and work with them are **Prompt Templates**, **Example Selectors**, and **Output Parsers**
 - **Memory**: this is a construct for retrieving and
+- **Documents** in LangChain refer to unstructured text associated with arbitrary metadata
 - **Indexes**: well... they index documents, but seriously, these abstractions are made of:
     - **Document Loaders**
     - **Text Splitters** that chunkify text into smaller pieces
     - **Vector Stores** that store documents as embeddings
     - **Retrievers** that fetch relevant documents
-
-
 
 ## LangChain and Vertex AI integration
 
