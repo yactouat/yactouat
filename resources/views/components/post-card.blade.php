@@ -4,25 +4,25 @@
     {{ $attributes->merge(['class' => 'transition-colors duration-100 hover:bg-gray-200 border border-gray-400 border-opacity-0 hover:border-opacity-5 rounded-xl']) }}
 >
     <div class="py-6 px-5">
-        <div class="flex justify-center">
+        <div class="flex justify-center items-center h-2/4">
             <img 
                 alt="blog post illustration" 
-                class="rounded-xl" 
+                class="rounded-xl post-card-thumbnail"
                 loading="lazy"
                 src="{{ $post->thumbnail_img }}" 
             >
         </div>
 
-        <div class="mt-8 flex flex-col justify-between">
-            <header>
-                <div class="space-x-2">
+        <div class="mt-4 flex flex-col justify-between h-2/4 post-card-content-wrapper">
+            <header class="h-1/3">
+                <div class="space-x-2 mt-2 h-1/3">
                     @foreach ($post->tags as $tag)
                         <x-tag-link :tag="$tag" />
                     @endforeach
                 </div>
 
-                <div class="mt-4">
-                    <h2 class="text-3xl">
+                <div class="mt-4 h-2/3">
+                    <h2 class="text-2xl">
                         <x-link href="/posts/{{ $post->slug }}">
                             {{ $post->title }}
                         </x-link>
@@ -35,14 +35,13 @@
             </header>
 
             <div 
-                class="text-sm mt-4 space-y-4 h-20 overflow-y-auto"
+                class="text-md mt-4 space-y-4 h-1/3 overflow-y-auto post-card-excerpt"
                 data-simplebar
-                id="post-card-excerpt"
             >
                 {{ $post->excerpt }}
             </div>
 
-            <footer class="flex justify-between items-center mt-8">
+            <footer class="flex justify-between items-center mt-8 h-1/3 post-card-footer">
                 <div class="flex items-center text-sm">
                     <!-- TODO implement profile pic -->
                     <!-- <img src="/images/lary-avatar.svg" alt="Lary avatar"> -->

@@ -52,7 +52,8 @@ class PostSeeder extends Seeder
                 if($postExists) 
                 {
                     // if exists check if has changed
-                    $postHasChanged = $postToSave->body !== $postInDb->body || $postToSave->excerpt !== $postInDb->excerpt || $postToSave->title !== $postInDb->title;
+                    $postHasChanged = $postToSave->body !== $postInDb->body || $postToSave->excerpt !== $postInDb->excerpt || 
+                        $postToSave->thumbnail_img != $postInDb->thumbnail_img || $postToSave->title !== $postInDb->title;
                 }
                 // process tags
                 $tags = collect($postData['tags'])

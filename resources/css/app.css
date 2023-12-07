@@ -30,6 +30,26 @@ html {
     min-height: 65vh;
 }
 
+.post-card-thumbnail {
+    height: 300px;
+    min-height: 300px;
+    margin: 0 auto;
+    object-fit: cover;
+    width: 100%;
+}
+
+.post-card-content-wrapper {
+    min-height: 350px;
+}
+
+#post-thumbnail {
+    border-radius: 25px;
+    height: 300px;
+    margin: 0 auto;
+    object-fit: cover;
+    width: 80%;
+}
+
 #post-body a {
     color: gray;
     font-weight: 600;

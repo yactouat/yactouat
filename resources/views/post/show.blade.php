@@ -9,7 +9,10 @@
 @section('content')
     <article class="max-full mx-auto lg:grid lg:grid-cols-12 gap-x-10 article-height">
         <div class="col-span-12">
-            <img src="{{ $post->thumbnail_img }}" alt="" class="rounded-xl w-96 h-96 mx-auto">
+            <img 
+                alt="main blog post illustration" 
+                id="post-thumbnail"
+                src="{{ $post->thumbnail_img }}" >
 
             <p class="mt-4 block text-gray-500 text-xs text-center">
                 last updated <time>{{ $post->updated_at->diffForHumans() }}</time>
