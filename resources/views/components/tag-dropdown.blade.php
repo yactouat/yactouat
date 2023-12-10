@@ -1,7 +1,7 @@
 <x-dropdown>
     <x-slot name="trigger">
         <button 
-            class="py-2 px-8 text-sm font-semibold w-full lg:w-32 text-left flex lg:inline-flex"
+            class="py-2 px-8 text-sm font-semibold w-full lg:w-52 text-left flex lg:inline-flex"
         >
             {{ isset($activeTag) ? $activeTag->name : 'tags' }}
 
