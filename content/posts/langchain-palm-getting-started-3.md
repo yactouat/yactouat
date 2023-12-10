@@ -1,5 +1,5 @@
 ---
-excerpt: Part 3 of the bits and pieces of me test-driving 🚘 Langchain using GCP's Vertex AI APIs; this time, we'll start with text embeddings.
+excerpt: Part 3 of the bits and pieces of me test-driving 🚘 Langchain using GCP's Vertex AI APIs; this time, we'll start with text embeddings and go on with prompt templates.
 tags: [AI-apis, LLMs, GCP, Vertex-AI, LangChain, agents]
 thumbnail_ai_generated: false
 thumbnail_img: langchain_palm.png
