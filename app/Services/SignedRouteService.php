@@ -4,9 +4,10 @@ namespace App\Services;
 
 use App\Models\PersistedSignedRoute;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Str;
 
 final class SignedRouteService
 {
@@ -31,11 +32,6 @@ final class SignedRouteService
         $persistedSignedRouteRecord->revoked = true;
         $persistedSignedRouteRecord->save();
 
-        // delete all persisted signed routes having same signature but not same id
-        DB::table('persisted_signed_routes')
-            ->where('signature', $persistedSignedRouteRecord->signature)
-            ->where('id', '!=', $persistedSignedRouteRecord->id)
-            ->delete();
         
         // log user in
         auth()->loginUsingId($userId);
@@ -44,51 +40,55 @@ final class SignedRouteService
     public function fetch(Request $request)
     {
         try {
-            $parsed = parse_url($request->fullUrl());
-            parse_str($parsed['query'], $queryParameters);
-            // it's a dirty job but someone's gotta do it
-            $signature = $queryParameters["signature"] ?? $queryParameters["amp;signature"];
+            $signature = $request->query('signature');
+            $inputDecrypted = Crypt::decryptString($signature);
+            $inputDecryptedArray = explode('-', $inputDecrypted);
             $persistedSignedRoute = DB::table('persisted_signed_routes')
-                ->where('user_id', $request->user)
                 ->where('signature', $signature)
+                ->where('action', $inputDecryptedArray[1] ?? null)
+                ->where('resource', $inputDecryptedArray[2] ?? null)
+                ->where('path', '/' . $request->path())
+                ->where('user_id', $inputDecryptedArray[0] ?? null)
                 ->where('revoked', false)
                 ->first();
             return $persistedSignedRoute;
         } catch (\Throwable $th) {
             Log::channel('stderr')->error(json_encode([
                 "msg" => "some funny business going on with a signed route",
-                "data" => $request->fullUrl()
+                "data" => $signature
             ]));
             Log::channel('stderr')->error(json_encode([
                 "msg" => $th->getMessage(),
-                "data" => $request->fullUrl()
+                "data" => $signature
             ]));
             return null;
         }
     }
 
+    public function makeUrl(PersistedSignedRoute $persistedSignedRoute)
+    {
+        return url($persistedSignedRoute->path . '?signature=' . $persistedSignedRoute->signature);
+    }
+
     /**
-     * issue a signed route and save it to db (for unsubscribe link)
+     * issues a signed route and saves it to db (for email authentification-based actions)
      * 
      * @param int $userId
-     * @param string $routeName
-     * @param mixed $param
+     * @param string $action
+     * @param string $resource
+     * @param string $path
      * @return string 
      */
-    public function persist(int $userId, string $routeName, $paramName = null, $paramId = null): string
+    public function persist(int $userId, string $action, string $resource, string $path): PersistedSignedRoute
     {
-        $url = URL::signedRoute(
-            $routeName, 
-            !$paramName ? ['user' => $userId] : [$paramName => $paramId, 'user' => $userId]
-        );
+
         $persistedSignedRoute = new PersistedSignedRoute();
         $persistedSignedRoute->user_id = $userId;
-        // get signature query param from url
-        $urlParts = parse_url($url);
-        parse_str($urlParts['query'], $queryParameters);
-        $signature = $queryParameters['signature'];
-        $persistedSignedRoute->signature = $signature;
+        $persistedSignedRoute->action = $action;
+        $persistedSignedRoute->resource = $resource;
+        $persistedSignedRoute->path = $path;
+        $persistedSignedRoute->signature = Crypt::encryptString($userId . '-' . $action . '-' . $resource . '-' . Str::random(8));
         $persistedSignedRoute->save();
-        return $url;
+        return $persistedSignedRoute;
     }
 }

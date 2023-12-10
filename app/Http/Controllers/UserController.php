@@ -28,9 +28,18 @@ class UserController extends Controller
         return redirect('/');
     }
 
-    public function edit()
+    public function edit(Request $request)
     {
-        return view('user.edit',[
+        // get signed route from db
+        $signedRouteService = resolve('SignedRouteService');
+        $persistedSignedRoute = $signedRouteService->fetch($request);
+        if(!$persistedSignedRoute) {
+            abort(401);
+        }
+
+        $signedRouteService->consume($persistedSignedRoute);
+
+        return view('user.edit', [
             'user' => auth()->user(),
         ]);
     }
@@ -119,31 +128,15 @@ class UserController extends Controller
         auth()->login($user);
 
         // issue a signed route and save it to db (for unsubscribe link)
-        $unsubscribeUrl = resolve('SignedRouteService')->persist($user->id, 'unsubscribe-from-emails');
+        $persistedSignedRoute = resolve('SignedRouteService')->persist($user->id, 'edit', 'user', '/profile');
 
         // notify user and admin
-        Mail::mailer('sendgrid')->to($email)->send(new UserWelcomed($user, $unsubscribeUrl));
+        Mail::mailer('sendgrid')->to($email)->send(new UserWelcomed($user, $persistedSignedRoute));
         Mail::mailer('sendgrid')->to(config('mail.reply_to.address'))->send(new UserRegistered($user));
         
         // redirect to home
         session()->flash('user.create.success', 'welcome to yactouat.com!');
         return redirect('/');
-    }
-
-    public function unsubscribeFromEmails(Request $request)
-    {
-        // get signed route from db
-        $signedRouteService = resolve('SignedRouteService');
-        $persistedSignedRoute = $signedRouteService->fetch($request);
-        if(!$persistedSignedRoute) {
-            abort(401);
-        }
-
-        $signedRouteService->consume($persistedSignedRoute);
-
-        return view('user.edit', [
-            'user' => auth()->user(),
-        ]);
     }
 
     public function update()

@@ -146,14 +146,14 @@ class PostSeeder extends Seeder
                 return;
             }
             $signedRouteService = resolve('SignedRouteService');
-            $unsubscribeUrl = $signedRouteService->persist($subscriber->id, 'unsubscribe-from-emails');
-            $authedUrl = $signedRouteService->persist($subscriber->id, 'post', 'post', $lastPost->slug);
+            $unsubscribeRoute = $signedRouteService->persist($subscriber->id, 'edit', 'user', '/profile');
+            $authedPostRoute = $signedRouteService->persist($subscriber->id, 'show', 'post', '/posts/' . $lastPost->slug);
             Mail::mailer('sendgrid')->to($subscriber->email)->send(
                 new PostAuthored(
-                    $unsubscribeUrl,
                     $subscriber,
                     $lastPost,
-                    $authedUrl
+                    $unsubscribeRoute,
+                    $authedPostRoute
                 )
             );
         });

@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Middleware\AllowsOnlyAdmin;
 use App\Mail\UserRegistered;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,8 +39,6 @@ Route::middleware('guest')->group(function() {
     Route::get('register', [UserController::class, 'create'])->middleware('guest');
     Route::post('register', [UserController::class, 'store'])->middleware('guest');
 });
-Route::get('unsubscribe-from-emails', [UserController::class, 'unsubscribeFromEmails'])
-    ->name('unsubscribe-from-emails');
 
 // messages and emails
 Route::post('contact', [MessageController::class, 'store'])->middleware('auth');
@@ -49,27 +48,23 @@ Route::get('posts/{post:slug}', [PostController::class, 'show'])->name('post');
 Route::post('posts/{post:slug}/comments', [PostCommentsController::class, 'store'])->name('post.comments')->middleware('auth');
 
 // tests
-// Route::get('test-start', function (Request $request) {
+Route::get('test-start', function (Request $request) {
     
-//     $unsubscribeUrl = resolve('SignedRouteService')->persist('1', 'test');
-//     dd($unsubscribeUrl);
+    $unsubscribeUrl = resolve('SignedRouteService')->persist(1, 'show', 'test', '/test-end');
+    dd(resolve('SignedRouteService')->makeUrl($unsubscribeUrl));
 
-// })->middleware(AllowsOnlyAdmin::class);
-// Route::get('test-end', function (Request $request) {
+})->middleware(AllowsOnlyAdmin::class);
+Route::get('test-end', function (Request $request) {
     
-//     try {
-//         // get signed route from db
-//         $signedRouteService = resolve('SignedRouteService');
-//         $persistedSignedRoute = $signedRouteService->fetch($request);
+    try {
+        $signedRouteObject = resolve('SignedRouteService')->fetch($request);
+        if (!$signedRouteObject) {
+            abort(401);
+        }
+        resolve('SignedRouteService')->consume($signedRouteObject);
+        dd($signedRouteObject);  
+    } catch (\Throwable $th) {
+        dd($th);
+    }
 
-//         // get params from signed route
-//         $parsed = parse_url($request->fullUrl());
-//         parse_str($parsed['query'], $queryParameters);
-//         $signature = $queryParameters["signature"] ?? $queryParameters["amp;signature"];
-
-//         dd($persistedSignedRoute, $parsed, $queryParameters, $signature);        
-//     } catch (\Throwable $th) {
-//         dd($th);
-//     }
-
-// })->name('test')->middleware(AllowsOnlyAdmin::class);
+})->name('test')->middleware(AllowsOnlyAdmin::class);

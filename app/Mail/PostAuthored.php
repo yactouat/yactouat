@@ -2,30 +2,33 @@
 
 namespace App\Mail;
 
+use App\Models\PersistedSignedRoute;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class PostAuthored extends Mailable
+class PostAuthored extends AppMail
 {
     use Queueable, SerializesModels;
+
+    public string $authedUrl;
 
     /**
      * Create a new message instance.
      */
     public function __construct(
-        public string $unsubscribeUrl, 
         public User $user, 
         public Post $post,
-        public string $authedUrl
+        private PersistedSignedRoute $unsubscribeRoute,
+        private PersistedSignedRoute $authedPostRoute
     )
     {
-        //
+        parent::__construct($user, $unsubscribeRoute);
+        $this->authedUrl = resolve('SignedRouteService')->makeUrl($authedPostRoute);
     }
 
     /**
