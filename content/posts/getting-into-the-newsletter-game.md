@@ -1,5 +1,5 @@
 ---
-excerpt: Alright, I'm tired to the bugs linked to my previous deployments (mainly the unsubscribe link not working on prod); although the reasons why a query param has the value of 'amp;signature' on localhost and 'signature' on prod are probably fascinating, I do want to tackle the next feature on day 3, or at least plan about it => `admin should be able to send mail campaigns on a schedule or on the spot`
+excerpt: Alright, I'm tired of the bugs linked to my previous deployments (mainly the unsubscribe link not working on prod); although the reasons why a query param has the value of 'amp;signature' on localhost and 'signature' on prod are probably fascinating, I do want to tackle the next feature on day 3, or at least plan about it => `admin should be able to send mail campaigns on a schedule or on the spot`
 tags: [software-development, ticket-stuff-out]
 thumbnail_ai_generated: true
 thumbnail_img: getting_into_the_newsletter_game.png
