@@ -33,7 +33,7 @@
                     <!-- <h6>Mascot at Laracasts</h6> -->
                 </div>
             </div>
-            <div class="hidden lg:flex justify-between mb-6">
+            <div class="lg:flex justify-between mb-6">
                 <x-link
                     href="/"
                     class="relative inline-flex items-center text-lg"

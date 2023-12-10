@@ -18,12 +18,12 @@
             @endif
         </div>
 
-        <div class="mt-4 flex flex-col justify-between h-2/4 post-card-content-wrapper">
+        <div class="mt-4 flex flex-col justify-between post-card-content-wrapper">
             <header>
                 <x-tag-links :tags="$post->tags"/>
 
                 <div class="mt-4">
-                    <h2 class="text-2xl">
+                    <h2 class="text-2xl h-16 overflow-y-auto">
                         <x-link href="/posts/{{ $post->slug }}">
                             {{ $post->title }}
                         </x-link>

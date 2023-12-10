@@ -9,12 +9,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
      <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/71848dd692.js" crossorigin="anonymous"></script>
-    <!-- custom scrollbar -->
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.css"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.min.js"></script>
+    <!-- custom scrollbar loaded asynchronously as explained in https://web.dev/articles/defer-non-critical-css?hl=en -->
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.css">
+    </noscript>
     <!-- Alpine -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
     <!-- application styles -->
@@ -23,16 +22,16 @@
 
 <body style="font-family: Open Sans, sans-serif">
     @include('partials._nav')
-
+    
     <section class="px-6 py-8">
-
+        
         <header class="max-w-xl mx-auto mt-12 text-center">
             <div class="flex flex-col justify-center items-center">
                 <div class="rounded-full bg-gray-200 w-32 h-32 flex flex-col items-center justify-center">
                     <img 
-                        alt="yactouat.comm logo (ai generated image content)"
-                        src="/logo.png"  
-                        class="w-32 h-32">
+                    alt="yactouat.comm logo (ai generated image content)"
+                    src="/logo.png"  
+                    class="w-32 h-32">
                 </div>
             </div>
             <h1 class="text-4xl">
@@ -40,22 +39,23 @@
             </h1>
             <!-- TODO implement profile pics -->
             <!-- <h2 class="inline-flex mt-2">By Lary Laracore <img src="/images/lary-head.svg"
-                                                                alt="Head of Lary the mascot"></h2> -->
+            alt="Head of Lary the mascot"></h2> -->
             
             @yield('header')
-
+            
             @yield('filters')
-
+            
         </header>
-
+        
         <main class="max-w-7xl mx-auto mt-6 lg:mt-20 space-y-6 min-h-screen">
             @yield('content')
         </main>
-
+        
         @include('partials._footer')
     </section>
-
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.min.js"></script>
     @vite('resources/js/app.js')
-
+    
     @include('partials._toasts')
 </body>
