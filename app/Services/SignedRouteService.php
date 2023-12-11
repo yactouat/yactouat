@@ -29,9 +29,8 @@ final class SignedRouteService
         $userId = $persistedSignedRouteRecord->user_id;
 
         // invalidate signed route
-        $persistedSignedRouteRecord->revoked = true;
+        $persistedSignedRouteRecord->open_count += 1;
         $persistedSignedRouteRecord->save();
-
         
         // log user in
         auth()->loginUsingId($userId);
@@ -47,10 +46,10 @@ final class SignedRouteService
                 ->where('signature', $signature)
                 ->where('action', $inputDecryptedArray[1] ?? null)
                 ->where('resource', $inputDecryptedArray[2] ?? null)
-                // TODO debug
-                // ->where('path', '/' . $request->path())
+                ->where('path', '/' . $request->path())
                 ->where('user_id', $inputDecryptedArray[0] ?? null)
-                ->where('revoked', false)
+                // accounting for the fact that Outlook opens links twice
+                ->where('open_count', '<',  2)
                 ->first();
             return $persistedSignedRoute;
         } catch (\Throwable $th) {
