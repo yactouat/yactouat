@@ -40,7 +40,8 @@ final class SignedRouteService
     public function fetch(Request $request)
     {
         try {
-            $signature = $request->query('signature') ?? $request->query('amp;signature');
+            dd($request->query(), $request->path());
+            $signature = $request->query('signature');
             $inputDecrypted = Crypt::decryptString($signature);
             $inputDecryptedArray = explode('-', $inputDecrypted);
             $persistedSignedRoute = DB::table('persisted_signed_routes')
