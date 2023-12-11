@@ -95,7 +95,9 @@ class UserController extends Controller
         }
 
         // issue a signed route and save it to db (for unsubscribe link)
-        $persistedSignedRoute = resolve('SignedRouteService')->persist($user->id, 'edit', 'user', '/profile');
+        // $persistedSignedRoute = resolve('SignedRouteService')->persist($user->id, 'edit', 'user', '/profile');
+        // TODO debug
+        $persistedSignedRoute = resolve('SignedRouteService')->persist($user->id, 'edit', 'user', '/test-end');
 
         // notify user and admin
         Mail::mailer('sendgrid')->to($credentials['email'])->send(new PasswordForgotten($user, $persistedSignedRoute));
