@@ -100,8 +100,7 @@ class UserController extends Controller
         // notify user and admin
         Mail::mailer('sendgrid')->to($credentials['email'])->send(new PasswordForgotten($user, $persistedSignedRoute));
 
-        session()->flash('user.sendPasswordResetLink.success', 'check your mailbox 😉');
-        return redirect('/');
+        return redirect('/')->with('user.sendPasswordResetLink.success', 'check your mailbox 😉');
     }
 
     public function showLogin()

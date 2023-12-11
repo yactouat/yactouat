@@ -52,7 +52,7 @@
 
 @if (session()->has('user.create.success') || session()->has('user.login.success') || session()->has('user.signupForNewsletter.success') 
     || session()->has('post.comment.success') || session()->has('user.profile-update.success') || session()->has('user.profile-deletion.success')
-    || session()->has('message.success')) || session()->has('user.sendPasswordResetLink.success')
+    || session()->has('message.success') || session()->has('user.sendPasswordResetLink.success')) 
     <script>
         window.addEventListener('DOMContentLoaded', function () {
             showToastMessage(5000);
