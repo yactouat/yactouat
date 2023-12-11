@@ -54,15 +54,15 @@ Route::post('posts/{post:slug}/comments', [PostCommentsController::class, 'store
 //     $unsubscribeUrl = resolve('SignedRouteService')->persist(1, 'show', 'test', '/test-end');
 //     dd(resolve('SignedRouteService')->makeUrl($unsubscribeUrl));
 // })->middleware(AllowsOnlyAdmin::class);
-// Route::get('test-end', function (Request $request) {
-//     try {
-//         $signedRouteObject = resolve('SignedRouteService')->fetch($request);
-//         if (!$signedRouteObject) {
-//             abort(401);
-//         }
-//         resolve('SignedRouteService')->consume($signedRouteObject);
-//         dd($signedRouteObject);  
-//     } catch (\Throwable $th) {
-//         dd($th);
-//     }
-// })->name('test')->middleware(AllowsOnlyAdmin::class);
+Route::get('test-end', function (Request $request) {
+    try {
+        $signedRouteObject = resolve('SignedRouteService')->fetch($request);
+        if (!$signedRouteObject) {
+            abort(401);
+        }
+        resolve('SignedRouteService')->consume($signedRouteObject);
+        dd($signedRouteObject);  
+    } catch (\Throwable $th) {
+        dd($th);
+    }
+})->name('test');
