@@ -40,7 +40,6 @@ final class SignedRouteService
     public function fetch(Request $request)
     {
         try {
-            dd($request->query(), $request->path());
             $signature = $request->query('signature');
             $inputDecrypted = Crypt::decryptString($signature);
             $inputDecryptedArray = explode('-', $inputDecrypted);
@@ -48,7 +47,8 @@ final class SignedRouteService
                 ->where('signature', $signature)
                 ->where('action', $inputDecryptedArray[1] ?? null)
                 ->where('resource', $inputDecryptedArray[2] ?? null)
-                ->where('path', '/' . $request->path())
+                // TODO debug
+                // ->where('path', '/' . $request->path())
                 ->where('user_id', $inputDecryptedArray[0] ?? null)
                 ->where('revoked', false)
                 ->first();
