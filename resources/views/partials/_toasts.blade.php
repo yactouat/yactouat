@@ -26,6 +26,10 @@
     <x-toast-message>
         <p>{{ session('message.success') }}</p>
     </x-toast-message>
+@elseif (session()->has('user.sendPasswordResetLink.success'))
+    <x-toast-message>
+        <p>{{ session('user.sendPasswordResetLink.success') }}</p>
+    </x-toast-message>
 @elseif (session()->has('user.signupForNewsletter.error'))
     <x-toast-message
         class="bg-red-500"
@@ -48,7 +52,7 @@
 
 @if (session()->has('user.create.success') || session()->has('user.login.success') || session()->has('user.signupForNewsletter.success') 
     || session()->has('post.comment.success') || session()->has('user.profile-update.success') || session()->has('user.profile-deletion.success')
-    || session()->has('message.success'))
+    || session()->has('message.success')) || session()->has('user.sendPasswordResetLink.success')
     <script>
         window.addEventListener('DOMContentLoaded', function () {
             showToastMessage(5000);

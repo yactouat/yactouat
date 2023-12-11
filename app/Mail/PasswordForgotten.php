@@ -2,26 +2,29 @@
 
 namespace App\Mail;
 
+use App\Models\PersistedSignedRoute;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class UserSubscribed extends Mailable
+class PasswordForgotten extends AppMail
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(public User $user)
+    public function __construct(
+        public User $user, 
+        private PersistedSignedRoute $unsubscribeRoute,
+    )
     {
-        //
+        parent::__construct($user, $unsubscribeRoute);
     }
+
 
     /**
      * Get the message envelope.
@@ -29,8 +32,7 @@ class UserSubscribed extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: config('mail.from.address'),
-            subject: 'a new user has subscribed to the newsletter',
+            subject: 'forgot password?',
         );
     }
 
@@ -40,7 +42,7 @@ class UserSubscribed extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'emails.admin.user-subscribed',
+            markdown: 'emails.user.password-forgotten',
         );
     }
 

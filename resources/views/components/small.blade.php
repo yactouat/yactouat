@@ -1,0 +1,1 @@
+<small class="text-gray-500">{{ $slot }}</small>

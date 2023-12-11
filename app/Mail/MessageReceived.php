@@ -40,7 +40,7 @@ class MessageReceived extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'emails.message-received',
+            markdown: 'emails.admin.message-received',
         );
     }
 

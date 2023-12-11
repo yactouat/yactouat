@@ -29,16 +29,18 @@ Route::get('/home', [PostController::class, 'index'])->name('home');
 Route::middleware('auth')->group(function() {
     Route::delete('delete-profile', [UserController::class, 'destroy']);
     Route::get('logout', [UserController::class, 'logout']);
-    Route::get('profile', [UserController::class, 'edit']);
     Route::post('signup-for-newsletter',[UserController::class, 'signupForNewsletter']);
     Route::patch('update-profile', [UserController::class, 'update']);
 });
 Route::middleware('guest')->group(function() {
+    Route::get('forgot-password', [UserController::class, 'showForgotPassword']);
+    Route::post('forgot-password', [UserController::class, 'sendPasswordResetLink']);
     Route::get('login', [UserController::class, 'showLogin'])->middleware('guest');
     Route::post('login', [UserController::class, 'login'])->middleware('guest');
     Route::get('register', [UserController::class, 'create'])->middleware('guest');
     Route::post('register', [UserController::class, 'store'])->middleware('guest');
 });
+Route::get('profile', [UserController::class, 'edit']);
 
 // messages and emails
 Route::post('contact', [MessageController::class, 'store'])->middleware('auth');

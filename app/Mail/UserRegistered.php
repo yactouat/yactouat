@@ -41,7 +41,7 @@ class UserRegistered extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'emails.registration.registered',
+            markdown: 'emails.admin.registered',
         );
     }
 

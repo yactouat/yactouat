@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\PasswordForgotten;
 use App\Mail\UserRegistered;
 use App\Mail\UserSubscribed;
 use App\Mail\UserWelcomed;
@@ -31,13 +32,20 @@ class UserController extends Controller
     public function edit(Request $request)
     {
         // get signed route from db
-        $signedRouteService = resolve('SignedRouteService');
-        $persistedSignedRoute = $signedRouteService->fetch($request);
-        if(!$persistedSignedRoute) {
-            abort(401);
+        if ($request->query('signature')) {
+            $signedRouteService = resolve('SignedRouteService');
+            $persistedSignedRoute = $signedRouteService->fetch($request);
+            if(!$persistedSignedRoute) {
+                abort(401);
+            }
+    
+            $signedRouteService->consume($persistedSignedRoute);
         }
 
-        $signedRouteService->consume($persistedSignedRoute);
+        // check if user is logged in
+        if (!auth()->check()) {
+            return redirect('/login');
+        }
 
         return view('user.edit', [
             'user' => auth()->user(),
@@ -70,9 +78,40 @@ class UserController extends Controller
         return redirect('/');
     }
 
+    public function sendPasswordResetLink()
+    {
+        $credentials = [
+            'email' => request('email')
+        ];
+
+        // check if user exists
+        $user = User::where('email', $credentials['email'])->first();
+        if (!$user) {
+            return back()
+                ->withInput()
+                ->withErrors([
+                    'email' => 'your provided credentials could not be verified',
+                ]);
+        }
+
+        // issue a signed route and save it to db (for unsubscribe link)
+        $persistedSignedRoute = resolve('SignedRouteService')->persist($user->id, 'edit', 'user', '/profile');
+
+        // notify user and admin
+        Mail::mailer('sendgrid')->to($credentials['email'])->send(new PasswordForgotten($user, $persistedSignedRoute));
+
+        session()->flash('user.sendPasswordResetLink.success', 'check your mailbox 😉');
+        return redirect('/');
+    }
+
     public function showLogin()
     {
         return view('user.login');
+    }
+
+    public function showForgotPassword()
+    {
+        return view('user.forgot-password');
     }
 
     public function signupForNewsLetter(NewsletterService $newsletterService)

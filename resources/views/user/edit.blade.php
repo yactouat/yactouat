@@ -18,7 +18,7 @@
                         name="password"
                         placeholder="****" 
                     />
-                    <small class="text-gray-500">leave blank to keep current password</small>
+                    <x-small>leave blank to keep current password</x-small>
                     <div class="flex items-center">
                         <label for="notify_on_blog_post" class="mr-2">be notified on new blog post</label>
                         <input

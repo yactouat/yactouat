@@ -43,7 +43,7 @@ class UserWelcomed extends AppMail
     public function content(): Content
     {
         return new Content(
-            markdown: 'emails.registration.welcome',
+            markdown: 'emails.user.welcome',
         );
     }
 
