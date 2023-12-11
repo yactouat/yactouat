@@ -63,6 +63,6 @@ Route::get('test-end', function (Request $request) {
         resolve('SignedRouteService')->consume($signedRouteObject);
         dd($signedRouteObject);  
     } catch (\Throwable $th) {
-        dd($th);
+        dd($th, $th->getMessage());
     }
 })->name('test');
