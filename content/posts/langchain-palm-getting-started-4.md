@@ -131,8 +131,7 @@ This chain leverages RAG (Retrieval-Augmented Generation) to perform QA over a s
 
 The example in the notebook builds up on the scraped websites documents from the previous example.
 
-<!-- TODO -->
-That's it folks, next article we'll tackle ...
+That's it folks, now you're able to write your own chains and use LangChain to augment your productivity and your applications!
 
 See you there! 👋
 
