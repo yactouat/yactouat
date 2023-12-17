@@ -11,6 +11,12 @@ html {
     min-width: 100vw;
 }
 
+img {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    object-fit: cover;
+}
+
 .nav-auth {
     align-items: center;
     display: flex;
