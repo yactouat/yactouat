@@ -5,11 +5,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @yield('meta')
-     <!-- Google fonts -->
+    <!-- Google fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-     <!-- Font Awesome -->
-    <script src="https://kit.fontawesome.com/71848dd692.js" crossorigin="anonymous"></script>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap">
+    </noscript>
+    <!-- Font Awesome -->
+    <script defer src="https://kit.fontawesome.com/71848dd692.js" crossorigin="anonymous"></script>
     <!-- custom scrollbar loaded asynchronously as explained in https://web.dev/articles/defer-non-critical-css?hl=en -->
     <link rel="preload" href="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript>
@@ -18,7 +21,10 @@
     <!-- Alpine -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
     <!-- ridiculous cookie consent banner -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.9.2/dist/cookieconsent.css">
+    <link rel="preload" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.9.2/dist/cookieconsent.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.9.2/dist/cookieconsent.css">
+    </noscript>
     <!-- application styles -->
     @vite('resources/css/app.css')
 </head>
