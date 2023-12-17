@@ -18,6 +18,8 @@
                     src="{{ $post->thumbnail_img }}" >
                 @if($post->thumbnail_ai_generated)
                     <x-ai-generated-illustration />
+                @else
+                    <p class="text-xs text-gray-500 my-2 self-start">{{ $post->thumbnail_img_alt }}</p>
                 @endif
                 <p class="block text-gray-500 text-xs text-center self-start my-2">
                     published <time>{{ $post->created_at->diffForHumans() }}</time>
