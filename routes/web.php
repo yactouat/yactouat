@@ -53,6 +53,9 @@ Route::post('posts/{post:slug}/comments', [PostCommentsController::class, 'store
 Route::get('impressum', function () {
     return view('legal.impressum');
 });
+Route::get('privacy-policy', function () {
+    return view('legal.privacy-policy');
+});
 
 // tests
 // Route::get('test-start', function (Request $request) {

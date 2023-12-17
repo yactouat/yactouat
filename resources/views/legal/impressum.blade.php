@@ -11,10 +11,10 @@
         <p>Yacine Touati<br>Strasbourg 67000 France</p>
 
         <h2 class="text-lg font-semibold mt-6 mb-2">Contact Information</h2>
-        <p>Email: <a href="mailto:yacine.touati.pro@gmail.com" class="text-gray-500 underline">yacine.touati.pro@gmail.com</a></p>
+        <p>Email: <a href="mailto:{{ config('mail.reply_to.address') }}" class="text-gray-500 underline">{{ config("mail.reply_to.address") }}</a></p>
 
         <h2 class="text-lg font-semibold mt-6 mb-2">Responsible for Content</h2>
-        <p>Yacine Touati, <a href="mailto:yacine.touati.pro@gmail.com" class="text-gray-500 underline">yacine.touati.pro@gmail.com</a></p>
+        <p>Yacine Touati, <a href="mailto:{{ config('mail.reply_to.address') }}" class="text-gray-500 underline">{{ config("mail.reply_to.address") }}</a></p>
 
         <h2 class="text-lg font-semibold mt-6 mb-2">Additional Information</h2>
         <p><br>SIRET Number: 85370939200015</p>

@@ -16,6 +16,8 @@
     </noscript>
     <!-- Alpine -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
+    <!-- ridiculous cookie consent banner -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.9.2/dist/cookieconsent.css">
     <!-- application styles -->
     @vite('resources/css/app.css')
 </head>
@@ -55,6 +57,7 @@
     </section>
     
     <script defer src="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.min.js"></script>
+    <x-cookie-consent />
     @vite('resources/js/app.js')
     
     @include('partials._toasts')

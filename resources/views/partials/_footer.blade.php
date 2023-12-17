@@ -93,11 +93,12 @@
     @endauth
 
     <div
-        class="bg-gray-200 border border-gray-400 border-opacity-5 rounded-xl text-center py-16 mt-16"
+        class="bg-gray-200 border border-gray-400 border-opacity-5 rounded-xl text-center py-16 mt-16 space-y-4"
     >
         <p>&copy; Yacine Touati</p>
         @if(request()->route()->uri() != 'impressum')
-        <x-link href="/impressum">impressum</x-link>
+        <p><x-link href="/impressum">impressum</x-link></p>
         @endif
+        <x-button type="button" data-cc="c-settings">Manage cookie settings</x-button>
     </div>
 </footer>
