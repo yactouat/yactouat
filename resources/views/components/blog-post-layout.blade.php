@@ -1,70 +1,72 @@
 <!doctype html>
 
-<head>
-    <title>yactouat.com | @yield('title')</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @yield('meta')
-    <!-- Google fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap">
-    </noscript>
-    <!-- Font Awesome -->
-    <script defer src="https://kit.fontawesome.com/71848dd692.js" crossorigin="anonymous"></script>
-    <!-- custom scrollbar loaded asynchronously as explained in https://web.dev/articles/defer-non-critical-css?hl=en -->
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.css">
-    </noscript>
-    <!-- highlight.js -->
-    <link rel="preload" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
-    </noscript>
-    <!-- ridiculous cookie consent banner -->
-    <link rel="preload" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.9.2/dist/cookieconsent.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.9.2/dist/cookieconsent.css">
-    </noscript>
-    <!-- application styles -->
-    @vite('resources/css/app.css')
-</head>
+<html lang="en">
+    <head>
+        <title>yactouat.com | @yield('title')</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        @yield('meta')
+        <!-- Google fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link rel="preload" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript>
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap">
+        </noscript>
+        <!-- Font Awesome -->
+        <script defer src="https://kit.fontawesome.com/71848dd692.js" crossorigin="anonymous"></script>
+        <!-- custom scrollbar loaded asynchronously as explained in https://web.dev/articles/defer-non-critical-css?hl=en -->
+        <link rel="preload" href="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.css">
+        </noscript>
+        <!-- highlight.js -->
+        <link rel="preload" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+        </noscript>
+        <!-- ridiculous cookie consent banner -->
+        <link rel="preload" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.9.2/dist/cookieconsent.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.9.2/dist/cookieconsent.css">
+        </noscript>
+        <!-- application styles -->
+        @vite('resources/css/app.css')
+    </head>
 
-<body style="font-family: Open Sans, sans-serif" class="w-full" id="app-blog-post-body">
-    @include('partials._nav')
+    <body style="font-family: Open Sans, sans-serif" class="w-full" id="app-blog-post-body">
+        @include('partials._nav')
 
-    <section class="px-6 py-8">
+        <section class="px-6 py-8">
 
-        <main class="max-w-7xl max-md:w-full mx-auto mt-10 lg:mt-20 space-y-6 min-h-screen">
-            @yield('content')
-        </main>
+            <main class="max-w-7xl max-md:w-full mx-auto mt-10 lg:mt-20 space-y-6 min-h-screen">
+                @yield('content')
+            </main>
 
-        @include('partials._footer')
-    </section>
+            @include('partials._footer')
+        </section>
 
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/php.min.js"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            function highlightCode() {
-                if (typeof hljs !== 'undefined') {
-                    hljs.highlightAll();
-                } else {
-                    setTimeout(highlightCode, 100);
+        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/php.min.js"></script>
+        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                function highlightCode() {
+                    if (typeof hljs !== 'undefined') {
+                        hljs.highlightAll();
+                    } else {
+                        setTimeout(highlightCode, 100);
+                    }
                 }
-            }
-            while (window.hljs === undefined) {
-                highlightCode();
-            }
-        });
-    </script>
-    <script defer src="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.min.js"></script>
-    <x-cookie-consent />
-    @vite('resources/js/app.js')
+                while (window.hljs === undefined) {
+                    highlightCode();
+                }
+            });
+        </script>
+        <script defer src="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.min.js"></script>
+        <x-cookie-consent />
+        @vite('resources/js/app.js')
 
-    @include('partials._toasts')
+        @include('partials._toasts')
 
-</body>
+    </body>
+</html>
