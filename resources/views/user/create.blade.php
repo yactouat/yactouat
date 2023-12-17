@@ -12,7 +12,7 @@
     <meta property="og:title" content="yactouat.com | register">
     <meta property="og:type" content="website">
     <meta property="og:image" content="{{ url('/') }}/logo.png">
-    <meta property="og:url" content="{{ url('/') }}">
+    <meta property="og:url" content="{{ url('/register') }}">
     <meta property="og:description" content="{{ $description }}">
     <!-- Twitter Tags -->
     <meta name="twitter:card" content="summary_large_image">

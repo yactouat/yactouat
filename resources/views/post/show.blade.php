@@ -7,20 +7,20 @@
     @php
         $tags_unioned = $post->tags->map(function($tag) {
             return $tag->name;
-        })->join(',');
+        })->join(', ');
     @endphp
     <meta name="keywords" content="{{ $tags_unioned }}">
     <!-- OpenGraph Tags -->
     <meta property="og:title" content="yactouat.com | {{ $post->title }}">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="{{ url('/') }}/logo.png">
-    <meta property="og:url" content="{{ url('/') }}">
+    <meta property="og:image" content="{{ $post->thumbnail_img }}">
+    <meta property="og:url" content="{{ url('/') . '/posts/' . $post->slug }}">
     <meta property="og:description" content="{{ $post->excerpt }}">
     <!-- Twitter Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="yactouat.com | {{ $post->title }}">
     <meta name="twitter:description" content="{{ $post->excerpt }}">
-    <meta name="twitter:image" content="{{ url('/') }}/logo.png">
+    <meta name="twitter:image" content="{{ $post->thumbnail_img }}">
 @endsection
 
 @section('filters')
