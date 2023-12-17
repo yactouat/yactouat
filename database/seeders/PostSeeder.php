@@ -117,6 +117,7 @@ class PostSeeder extends Seeder
                     $postInDb->title = $postToSave->title;
                     $postInDb->thumbnail_ai_generated = $postToSave->thumbnail_ai_generated;
                     $postInDb->thumbnail_img = $postToSave->thumbnail_img;
+                    $postInDb->thumbnail_img_web = $postToSave->thumbnail_img_web;
                     $postInDb->thumbnail_img_alt = $postToSave->thumbnail_img_alt;
                     $postInDb->updated_at = now();
                     $postInDb->save();
