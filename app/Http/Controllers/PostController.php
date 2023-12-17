@@ -13,7 +13,7 @@ class PostController extends Controller
     }
 
     public function index() {
-        $posts = Cache::rememberForever("posts", function() { 
+        $posts = Cache::remember("posts", 86400, function() { 
             return Post::latest()->with('tags', 'author')->paginate(9);
         });
         if(request('search') || request('tag') || request('author') || request('page')) {
@@ -41,7 +41,7 @@ class PostController extends Controller
             }
         }
         else {
-            $post = Cache::rememberForever("posts.{$post->slug}", function () use ($post) {
+            $post = Cache::remember("posts.{$post->slug}", 86400, function () use ($post) {
                 return $post->load(['tags', 'author']);
             });
         }
