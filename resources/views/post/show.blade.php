@@ -13,14 +13,14 @@
     <!-- OpenGraph Tags -->
     <meta property="og:title" content="yactouat.com | {{ $post->title }}">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="{{ $post->thumbnail_img }}">
+    <meta property="og:image" content="{{ $post->thumbnail_img_web }}">
     <meta property="og:url" content="{{ url('/') . '/posts/' . $post->slug }}">
     <meta property="og:description" content="{{ $post->excerpt }}">
     <!-- Twitter Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="yactouat.com | {{ $post->title }}">
     <meta name="twitter:description" content="{{ $post->excerpt }}">
-    <meta name="twitter:image" content="{{ $post->thumbnail_img }}">
+    <meta name="twitter:image" content="{{ $post->thumbnail_img_web }}">
 @endsection
 
 @section('filters')
@@ -36,7 +36,7 @@
                 <img 
                     alt="{{ $post->thumbnail_img_alt }}" 
                     id="post-thumbnail"
-                    src="{{ $post->thumbnail_img }}" >
+                    src="{{ $post->thumbnail_img_web }}" >
                 @if($post->thumbnail_ai_generated)
                     <x-ai-generated-illustration />
                 @else

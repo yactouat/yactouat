@@ -85,16 +85,26 @@ class PostSeeder extends Seeder
                 // push thumbnail to storage
                 if($postToSave->thumbnail_img != null) 
                 {
+                    // calling `webp` on the filename will convert it to webp
+                    exec('cwebp -q 80 ' . base_path('content/images') . '/' . $postToSave->thumbnail_img . ' -o ' . base_path('content/images') . '/' . $postToSave->thumbnail_img . '.webp');
+                    $webPImagePath = base_path('content/images') . '/' . $postToSave->thumbnail_img . '.webp';
                     Storage::disk('gcp_public')
                         ->put(
                             RemoteUrlService::prefix() . 'images/' . $postToSave->thumbnail_img, 
                             file_get_contents(base_path('content/images') . '/' . $postToSave->thumbnail_img)
                         );
+                    Storage::disk('gcp_public')
+                        ->put(
+                            RemoteUrlService::prefix() . 'images/' . $postToSave->thumbnail_img . '.webp', 
+                            file_get_contents($webPImagePath)
+                        );
+                    $postToSave->thumbnail_img_web = RemoteUrlService::get(RemoteUrlService::prefix() . 'images/' . $postToSave->thumbnail_img . '.webp');
                     $postToSave->thumbnail_img = RemoteUrlService::get(RemoteUrlService::prefix() . 'images/' . $postToSave->thumbnail_img);
                 } 
                 else 
                 {
                     $postToSave->thumbnail_img = "/images/blog-post-thumbnail-placeholder.png";
+                    $postToSave->thumbnail_img_web = "/images/blog-post-thumbnail-placeholder.webp";
                 }
 
                 // first save without tags

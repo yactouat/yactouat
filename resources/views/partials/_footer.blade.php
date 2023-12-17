@@ -50,7 +50,7 @@
             class="bg-gray-100 border border-gray-400 border-opacity-5 rounded-xl text-center py-16 px-10 mt-16"
             id="footer-newsletter"
         >
-            <img src="/images/newsletter-icon.png" alt="envelope icon" class="mx-auto rounded-full shadow" style="width: 100px;">
+            <img src="/images/newsletter-icon.webp" alt="envelope icon" class="mx-auto rounded-full shadow" style="width: 100px;">
             <h5 class="text-3xl">subscribe to my updates!</h5>
             <p class="text-sm mt-3">I promise I won't spam you</p>
 
@@ -65,7 +65,7 @@
                                 <img 
                                     alt="mailbox icon" 
                                     class="rounded-full shadow"
-                                    src="/images/mailbox-icon.png" 
+                                    src="/images/mailbox-icon.webp" 
                                     style="width: 40px;"
                                 >
                             </label>

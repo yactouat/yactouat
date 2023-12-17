@@ -6,6 +6,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     git \
     libpq-dev \
     unzip \
+    wget \
     zip
 
 RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
@@ -34,6 +35,14 @@ RUN apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/*
 # create system user ("yactouat" with uid 1000) 
 RUN useradd -G www-data,root -u 1000 -d /home/yactouat yactouat
 RUN mkdir -p /home/yactouat/ && chown -R yactouat:yactouat /home/yactouat
+
+# downloading webp
+RUN wget https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.3.2-linux-x86-64.tar.gz \
+    && tar -xzf libwebp-1.3.2-linux-x86-64.tar.gz \
+    && cp libwebp-1.3.2-linux-x86-64/bin/dwebp /usr/local/bin/dwebp \
+    && cp libwebp-1.3.2-linux-x86-64/bin/cwebp /usr/local/bin/cwebp \
+    && rm -rf libwebp-1.3.2-linux-x86-64 \
+    && rm libwebp-1.3.2-linux-x86-64.tar.gz
 
 # changing user 
 USER yactouat

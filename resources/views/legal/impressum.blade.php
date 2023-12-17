@@ -8,14 +8,14 @@
     <!-- OpenGraph Tags -->
     <meta property="og:title" content="yactouat.com | impressum">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="{{ url('/') }}/logo.png">
+    <meta property="og:image" content="{{ url('/') }}/logo.webp">
     <meta property="og:url" content="{{ url('/') }}/impressum">
     <meta property="og:description" content="impressum of yactouat.com">
     <!-- Twitter Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="yactouat.com | impressum">
     <meta name="twitter:description" content="impressum of yactouat.com">
-    <meta name="twitter:image" content="{{ url('/') }}/logo.png">
+    <meta name="twitter:image" content="{{ url('/') }}/logo.webp">
 @endsection
 
 @section('content')

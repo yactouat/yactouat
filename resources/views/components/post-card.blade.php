@@ -9,7 +9,7 @@
                 alt="{{ $post->thumbnail_img_alt }}" 
                 class="rounded-xl post-card-thumbnail"
                 loading="lazy"
-                src="{{ $post->thumbnail_img }}" 
+                src="{{ $post->thumbnail_img_web }}" 
             >
             @if($post->thumbnail_ai_generated)
                 <x-ai-generated-illustration />
