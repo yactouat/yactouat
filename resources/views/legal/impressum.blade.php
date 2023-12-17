@@ -2,6 +2,22 @@
 
 @section('title', 'impressum')
 
+@section('meta')
+    <meta name="description" content="impressum of yactouat.com">
+    <meta name="keywords" content="legal, impressum">
+    <!-- OpenGraph Tags -->
+    <meta property="og:title" content="yactouat.com | impressum">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="{{ url('/') }}/logo.png">
+    <meta property="og:url" content="{{ url('/') }}/impressum">
+    <meta property="og:description" content="impressum of yactouat.com">
+    <!-- Twitter Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="yactouat.com | impressum">
+    <meta name="twitter:description" content="impressum of yactouat.com">
+    <meta name="twitter:image" content="{{ url('/') }}/logo.png">
+@endsection
+
 @section('content')
     <div class="container mx-auto px-4 py-8">
         <h1 class="text-xl font-semibold mb-4">Impressum</h1>

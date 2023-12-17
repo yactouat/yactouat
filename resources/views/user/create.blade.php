@@ -2,6 +2,25 @@
 
 @section('title', 'register')
 
+@section('meta')
+    @php
+        $description = "register to yactouat.com, the developer website and blog of Yacine Touati about AI, software development, and tech in general!";
+    @endphp
+    <meta name="description" content="{{ $description }}">
+    <meta name="keywords" content="software, AI, developer, blog, tech">
+    <!-- OpenGraph Tags -->
+    <meta property="og:title" content="yactouat.com | register">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="{{ url('/') }}/logo.png">
+    <meta property="og:url" content="{{ url('/') }}">
+    <meta property="og:description" content="{{ $description }}">
+    <!-- Twitter Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="yactouat.com | register">
+    <meta name="twitter:description" content="{{ $description }}">
+    <meta name="twitter:image" content="{{ url('/') }}/logo.png">
+@endsection
+
 @section('content')
     <section class="px-6 py-8 max-md:px-0">
         <x-panel

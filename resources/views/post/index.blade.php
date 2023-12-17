@@ -1,6 +1,25 @@
 @extends('components.layout')
 
-@section('title', 'posts')
+@section('title', 'blog')
+
+@section('meta')
+    @php
+        $description = "home of yactouat.com, the developer website and blog of Yacine Touati about AI, software development, and tech in general!";
+    @endphp
+    <meta name="description" content="{{ $description }}">
+    <meta name="keywords" content="software, AI, developer, blog, tech">
+    <!-- OpenGraph Tags -->
+    <meta property="og:title" content="yactouat.com | blog">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="{{ url('/') }}/logo.png">
+    <meta property="og:url" content="{{ url('/') }}">
+    <meta property="og:description" content="{{ $description }}">
+    <!-- Twitter Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="yactouat.com | blog">
+    <meta name="twitter:description" content="{{ $description }}">
+    <meta name="twitter:image" content="{{ url('/') }}/logo.png">
+@endsection
 
 @section('header')
 <section class="max-w-6xl mx-auto px-6 py-8">
