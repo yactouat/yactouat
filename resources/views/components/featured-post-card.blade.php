@@ -7,7 +7,6 @@
             <img
                 alt="Blog Post illustration"
                 class="rounded-xl"
-                loading="lazy"
                 src="{{ $post->thumbnail_img_web }}"
             >
             @if($post->thumbnail_ai_generated)
