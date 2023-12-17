@@ -96,5 +96,8 @@
         class="bg-gray-200 border border-gray-400 border-opacity-5 rounded-xl text-center py-16 mt-16"
     >
         <p>&copy; Yacine Touati</p>
+        @if(request()->route()->uri() != 'impressum')
+        <x-link href="/impressum">impressum</x-link>
+        @endif
     </div>
 </footer>

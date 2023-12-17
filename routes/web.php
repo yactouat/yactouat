@@ -49,6 +49,11 @@ Route::post('contact', [MessageController::class, 'store'])->middleware('auth');
 Route::get('posts/{post:slug}', [PostController::class, 'show'])->name('post');
 Route::post('posts/{post:slug}/comments', [PostCommentsController::class, 'store'])->name('post.comments')->middleware('auth');
 
+// legal pages
+Route::get('impressum', function () {
+    return view('legal.impressum');
+});
+
 // tests
 // Route::get('test-start', function (Request $request) {
 //     $unsubscribeUrl = resolve('SignedRouteService')->persist(1, 'show', 'test', '/test-end');
