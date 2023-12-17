@@ -28,7 +28,7 @@
                     </h2>
 
                     <span class="mt-2 block text-gray-500 text-sm">
-                        last updated <time>{{ $post->updated_at->diffForHumans() }}</time>
+                        published <time>{{ $post->created_at->diffForHumans() }}</time>
                     </span>
                 </div>
             </header>

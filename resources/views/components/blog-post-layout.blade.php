@@ -28,6 +28,7 @@
         @include('partials._footer')
     </section>
 
+    <script defer src="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.min.js"></script>
     @vite('resources/js/app.js')
 
     @include('partials._toasts')

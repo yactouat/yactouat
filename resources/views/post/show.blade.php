@@ -19,8 +19,8 @@
                 @if($post->thumbnail_ai_generated)
                     <x-ai-generated-illustration />
                 @endif
-                <p class="block text-gray-500 text-xs text-center self-start">
-                    last updated <time>{{ $post->updated_at->diffForHumans() }}</time>
+                <p class="block text-gray-500 text-xs text-center self-start my-2">
+                    published <time>{{ $post->created_at->diffForHumans() }}</time>
                 </p>        
             </div>
 

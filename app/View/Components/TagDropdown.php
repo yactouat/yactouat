@@ -22,7 +22,7 @@ class TagDropdown extends Component
      */
     public function render(): View|Closure|string
     {
-        $tags = Cache::remember('tags', 86400, function () {
+        $tags = Cache::remember('tags', config('cache.content_cache_duration'), function () {
             return \App\Models\Tag::all()->sortBy('name');
         });
         return view('components.tag-dropdown', [
