@@ -53,6 +53,7 @@
             <img 
                 alt="envelope icon"
                 class="mx-auto rounded-full shadow"
+                loading="lazy"
                 src="/images/newsletter-icon.webp"  
                 style="width: 100px;">
             <h5 class="text-3xl">subscribe to my updates!</h5>
@@ -69,6 +70,7 @@
                                 <img 
                                     alt="mailbox icon" 
                                     class="rounded-full shadow"
+                                    loading="lazy"
                                     src="/images/mailbox-icon.webp" 
                                     style="width: 40px;"
                                 >
