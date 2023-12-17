@@ -6,6 +6,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     git \
     libpq-dev \
     unzip \
+    wget \
     zip
 
 RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
