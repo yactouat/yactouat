@@ -33,8 +33,8 @@
                 <div class="rounded-full bg-gray-200 w-32 h-32 flex flex-col items-center justify-center">
                     <img 
                     alt="yactouat.comm logo (ai generated image content)"
-                    src="/logo.webp"  
-                    class="w-32 h-32">
+                    class="w-32 h-32"
+                    src="/logo.webp"> 
                 </div>
             </div>
             <h1 class="text-4xl">
