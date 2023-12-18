@@ -56,7 +56,7 @@
                 loading="lazy"
                 src="/images/newsletter-icon.webp"  
                 style="width: 100px;">
-            <h5 class="text-3xl">subscribe to my updates!</h5>
+            <h2 class="text-3xl">subscribe to my updates!</h2>
             <p class="text-sm mt-3">I promise I won't spam you</p>
 
             <div class="mt-10">
@@ -66,7 +66,7 @@
                         <div 
                             class="flex items-center lg:w-72 max-md:w-64"
                         >
-                            <label for="email" class="hidden lg:inline-block">
+                            <label for="email-footer-input" class="hidden lg:inline-block">
                                 <img 
                                     alt="mailbox icon" 
                                     class="rounded-full shadow"
@@ -77,7 +77,7 @@
                             </label>
                             <input 
                                 class="lg:bg-transparent py-2 lg:py-0 pl-4 focus-within:outline-none lg:w-3/4 max-md:w-64"
-                                id="email" 
+                                id="email-footer-input" 
                                 name="email"
                                 type="text" 
                                 placeholder="Your email address">
