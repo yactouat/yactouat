@@ -21,11 +21,11 @@
                 <x-tag-links :tags="$post->tags" />
 
                 <div class="mt-4">
-                    <h2 class="text-4xl max-md:text-xl">
+                    <h3 class="text-4xl max-md:text-xl">
                         <x-link href="/posts/{{ $post->slug }}">
                             {{ $post->title }}
                         </x-link>
-                    </h2>
+                    </h3>
 
                     <span class="mt-2 block text-gray-500 text-sm">
                         published <time>{{ $post->created_at->diffForHumans() }}</time>
@@ -42,13 +42,13 @@
                     <!-- TODO implement profile pic -->
                     <!-- <img src="/images/lary-avatar.svg" alt="Lary avatar"> -->
                     <div>
-                        <h5 class="font-bold">by <x-link href="/?author={{ $post->author->username }}">{{ $post->author->name }}</x-link></h5>
+                        <h4 class="font-bold">by <x-link href="/?author={{ $post->author->username }}">{{ $post->author->name }}</x-link></h4>
                     </div>
                 </div>
 
                 <div class="lg:block">
                     <x-link-button  href="/posts/{{ $post->slug }}">
-                        read more
+                        read this blog article
                     </x-link-button>
                 </div>
             </footer>

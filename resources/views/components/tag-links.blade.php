@@ -9,7 +9,7 @@
 </div>
 
 <div 
-    class="space-x-2 flex h-20 overflow-x-auto sm:max-xl:hidden"
+    class="space-x-2 h-20 overflow-x-auto hidden xl:flex"
 >
     @foreach ($tags as $tag)
         <x-tag-link :tag="$tag" />
