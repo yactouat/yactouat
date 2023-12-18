@@ -16,6 +16,9 @@ img {
     width: 100%;
     object-fit: cover;
 }
+.ai-generated-illustration-text {
+    color: #4D515C;
+}
 
 .nav-auth {
     align-items: center;
@@ -95,4 +98,8 @@ img {
 
 .post-comments {
     align-items: end;
+}
+
+.footer-link {
+    color: #444851;
 }

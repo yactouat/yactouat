@@ -32,7 +32,7 @@
     </div>
 
     <div class="text-center mb-8">
-        <h3 class="text-3xl font-semibold mb-4">contact me</h3>
+        <h2 class="text-3xl font-semibold mb-4">contact me</h2>
         <p class="text-gray-600">have questions? <x-link href="#app-contact">get in touch!</x-link></p>
     </div>
 
