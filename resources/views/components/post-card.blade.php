@@ -55,7 +55,7 @@
                     <x-link-button 
                         href="/posts/{{ $post->slug }}"
                     >
-                        read more
+                        read this blog article
                     </x-link-button>
                 </div>
             </footer>
