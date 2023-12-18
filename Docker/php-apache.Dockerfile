@@ -38,8 +38,10 @@ RUN set -ex; \
 # copy Apache virtual host
 COPY ./Docker/conf/apache.conf /etc/apache2/sites-available/000-default.conf
 
-# enabling Apache mod rewrite
+# enabling Apache mod rewrite and headers
 RUN a2enmod rewrite
+RUN a2enmod headers
+
 
 # cleaning up
 RUN apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/*
