@@ -43,7 +43,7 @@
                     <p class="text-xs text-gray-500 my-2">{{ $post->thumbnail_img_alt }}</p>
                 @endif
                 <p class="block text-gray-500 text-xs text-center self-start my-2">
-                    published <time>{{ $post->created_at->diffForHumans() }}</time>
+                    published <span>{{ $post->created_at->diffForHumans() }}</span>
                 </p>        
             </div>
 

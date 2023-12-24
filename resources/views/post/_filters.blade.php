@@ -12,8 +12,7 @@
                 name="search" 
                 placeholder="search content"
                 type="text" 
-                value="{{ request('search') }}"
-            />
+                value="{{ request('search') }}">
         </form>
     </div> 
 </div>

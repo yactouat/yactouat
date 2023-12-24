@@ -33,7 +33,7 @@
     <body style="font-family: Open Sans, sans-serif">
         @include('partials._nav')
         
-        <section class="px-6 py-8">
+        <main class="px-6 py-8">
             
             <header class="max-w-xl mx-auto mt-12 text-center">
                 <div class="flex flex-col justify-center items-center">
@@ -57,12 +57,12 @@
                 
             </header>
             
-            <main class="max-w-7xl mx-auto mt-6 lg:mt-20 space-y-6 min-h-screen">
+            <section class="max-w-7xl mx-auto mt-6 lg:mt-20 space-y-6 min-h-screen">
                 @yield('content')
-            </main>
+            </section>
             
             @include('partials._footer')
-        </section>
+        </main>
         
         <script defer src="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.min.js"></script>
         <x-cookie-consent />
