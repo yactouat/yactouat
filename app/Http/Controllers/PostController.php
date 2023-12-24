@@ -28,7 +28,7 @@ class PostController extends Controller
     }
 
     public function show(Post $post) {
-        if (!$post) {
+        if (!$post || !$post->is_published) {
             abort(404);
         }
         $persistedSignedRoute = null;

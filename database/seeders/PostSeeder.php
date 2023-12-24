@@ -136,8 +136,13 @@ class PostSeeder extends Seeder
         $noLongerAuthored->each(function ($post) {
             $post->delete();
         });
-        // get last of new posts
-        $lastPost = $newPosts->sortByDesc('created_at')->first();
+        // get last of new published posts
+        $lastPost = $newPosts
+            ->filter(function ($post) {
+                return $post->is_published;
+            })
+            ->sortByDesc('created_at')
+            ->first();
         // get users who are subscribed to new posts notifications
         $subscribers = User::where('notify_on_blog_post', true)->get();
         // send email to subscribers
