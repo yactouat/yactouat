@@ -6,13 +6,12 @@ use App\Mail\PostAuthored;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\User;
+use App\Services\ImageService;
 use App\Services\PostMarkdownProcessorService;
-use App\Services\RemoteUrlService;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Storage;
 
 class PostSeeder extends Seeder
 {
@@ -55,6 +54,7 @@ class PostSeeder extends Seeder
                     $fields = [
                         'body',
                         'excerpt',
+                        'is_published',
                         'thumbnail_ai_generated',
                         'thumbnail_img',
                         'thumbnail_img_alt',
@@ -62,7 +62,7 @@ class PostSeeder extends Seeder
                     ];
                     foreach($fields as $field) 
                     {
-                        if($postToSave->{$field} !== $postInDb->{$field}) 
+                        if($postToSave->{$field} != $postInDb->{$field}) 
                         {
                             $postHasChanged = true;
                             break;
@@ -85,21 +85,9 @@ class PostSeeder extends Seeder
                 // push thumbnail to storage
                 if($postToSave->thumbnail_img != null) 
                 {
-                    // calling `webp` on the filename will convert it to webp
-                    exec('cwebp -q 80 ' . base_path('content/images') . '/' . $postToSave->thumbnail_img . ' -o ' . base_path('content/images') . '/' . $postToSave->thumbnail_img . '.webp');
-                    $webPImagePath = base_path('content/images') . '/' . $postToSave->thumbnail_img . '.webp';
-                    Storage::disk('gcp_public')
-                        ->put(
-                            RemoteUrlService::prefix() . 'images/' . $postToSave->thumbnail_img, 
-                            file_get_contents(base_path('content/images') . '/' . $postToSave->thumbnail_img)
-                        );
-                    Storage::disk('gcp_public')
-                        ->put(
-                            RemoteUrlService::prefix() . 'images/' . $postToSave->thumbnail_img . '.webp', 
-                            file_get_contents($webPImagePath)
-                        );
-                    $postToSave->thumbnail_img_web = RemoteUrlService::get(RemoteUrlService::prefix() . 'images/' . $postToSave->thumbnail_img . '.webp');
-                    $postToSave->thumbnail_img = RemoteUrlService::get(RemoteUrlService::prefix() . 'images/' . $postToSave->thumbnail_img);
+                    $remoteImagesPaths = ImageService::storeOriginalAndWebImages($postToSave->thumbnail_img);
+                    $postToSave->thumbnail_img_web = $remoteImagesPaths['remoteWebImagePath'];
+                    $postToSave->thumbnail_img = $remoteImagesPaths['remoteOriginalImagePath'];
                 } 
                 else 
                 {
@@ -114,6 +102,7 @@ class PostSeeder extends Seeder
                 if($postExists && $postHasChanged) {
                     $postInDb->body = $postToSave->body;
                     $postInDb->excerpt = $postToSave->excerpt;
+                    $postInDb->is_published = $postToSave->is_published;
                     $postInDb->title = $postToSave->title;
                     $postInDb->thumbnail_ai_generated = $postToSave->thumbnail_ai_generated;
                     $postInDb->thumbnail_img = $postToSave->thumbnail_img;

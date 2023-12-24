@@ -72,6 +72,10 @@ img {
     width: 80%;
 }
 
+#post-body {
+    font-weight: 500;
+}
+
 #post-body h2, #post-body h3, #post-body h4, #post-body h5, #post-body h6 {
     font-size: larger;
     font-weight: 600;
@@ -94,6 +98,14 @@ img {
     margin-inline-start: 0px;
     margin-inline-end: 0px;
     padding-inline-start: 40px;
+}
+
+#post-body pre {
+    margin: 1.2rem 0;
+}
+
+#post-body img {
+    object-fit: contain;
 }
 
 .post-comments {

@@ -9,7 +9,7 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $fillable = [ 'body', 'excerpt', 'published_at', 'slug', 'title', 'updated_at' ];
+    protected $fillable = ['body', 'excerpt', 'is_published', 'published_at', 'slug', 'title', 'updated_at' ];
 
     public function author()
     {
@@ -41,6 +41,11 @@ class Post extends Model
             $query->whereHas('author', fn($query) =>
                 $query->where('username', $author)
         ));
+
+        $query->when($filters['is_published'] ?? true, fn($query, $is_published) =>
+            $query->where('is_published', $is_published)
+        );
+
     }
 
     public function tags()

@@ -1,8 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Services;
 
-class RemoteUrlService
+final class RemoteUrlService
 {
     public static function get(string $path): string
     {

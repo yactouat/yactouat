@@ -14,13 +14,13 @@ class PostController extends Controller
 
     public function index() {
         $posts = Cache::remember("posts", config('cache.content_cache_duration'), function() { 
-            return Post::latest()->with('tags', 'author')->paginate(9);
+            return Post::latest()->filter(request(['is_published']))->with('tags', 'author')->paginate(9);
         });
         if(request('search') || request('tag') || request('author') || request('page')) {
             $posts = Post::latest()
-                ->filter(request(['search', 'tag', 'author']))
+                ->filter(request(['search', 'tag', 'author', 'is_published']))
                 ->with('tags', 'author')
-                ->paginate(9)->withQueryString();
+                ->paginate(9);
         }
         return view('post.index', [
             'posts' => $posts,

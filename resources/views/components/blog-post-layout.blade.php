@@ -20,10 +20,7 @@
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.css">
         </noscript>
         <!-- highlight.js -->
-        <link rel="preload" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript>
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
-        </noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
         <!-- ridiculous cookie consent banner -->
         <link rel="preload" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.9.2/dist/cookieconsent.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript>
@@ -45,22 +42,12 @@
             @include('partials._footer')
         </section>
 
-        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/php.min.js"></script>
-        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/markdown.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/php.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                function highlightCode() {
-                    if (typeof hljs !== 'undefined') {
-                        hljs.highlightAll();
-                    } else {
-                        setTimeout(highlightCode, 100);
-                    }
-                }
-                while (window.hljs === undefined) {
-                    highlightCode();
-                }
-            });
+            hljs.highlightAll();
         </script>
         <script defer src="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.min.js"></script>
         <x-cookie-consent />
