@@ -1,10 +1,9 @@
 ---
-excerpt: Seizing the opportunity of making this very website, I found it refreshing to re learn what was once my everyday life as a web developer, now that my current job is more focused on AI. In this post, I will share some notes about SEO that I took along the way.
-is_published: false
+excerpt: Seizing the opportunity of making this very website, I found it refreshing to re learn what was once my everyday life as a web developer, now that my current job is more focused on AI. In this post, I will share some notes about SEO that I took along the way this is part 1 of a longer series, as I'm realizing there are quite a lot of things to say about this.
 tags: [seo, web-dev]
 thumbnail_ai_generated: true
 thumbnail_img: seo.jpg
-title: notes on SEO
+title: notes on SEO (part 1)
 ---
 
 ## why SEO?
@@ -84,6 +83,11 @@ Having backlinks from other websites is a good way to increase your authorativen
 You need to wait for Google's bots to crawl your webite and index it again. This can happen within a few days to a few weeks. You can check if your website has been indexed by searching for `site:yourwebsite.com` on Google.
 
 After that first re indexation, you can expect to see your website's ranking improve a bit. But significant changes will only happen after a few months, when Google will have crawled your website again and again, and will have seen that your website is still relevant.
+
+## Some tools you can test drive while sorting out your SEO
+
+- Google Search Console and its wonderful documentation
+- Google Trends
 
 ## sources
 

@@ -139,7 +139,7 @@ class PostSeeder extends Seeder
         // get last of new published posts
         $lastPost = $newPosts
             ->filter(function ($post) {
-                return $post->is_published;
+                return $post->is_published != false;
             })
             ->sortByDesc('created_at')
             ->first();
