@@ -13,11 +13,6 @@
                 <i class="fa-solid fa-envelope"></i>
             </x-link-button>
         @endif
-    @elseif(!request()->is('register'))
-        <x-link class="space-x-1" href="/register">
-            <span>register and subscribe to updates!</span>
-            <i class="fa-solid fa-envelope"></i>
-        </x-link>
     @endauth
     <div class="nav-auth px-5">
         @auth

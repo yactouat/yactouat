@@ -109,8 +109,8 @@
         <p>&copy; Yacine Touati</p>
         <x-button type="button" data-cc="c-settings">Manage cookie settings</x-button>
         <div class="flex justify-center items-center space-x-2">
-            @if(request()->route()->uri() != 'impressum')<p class="underline"><x-link class="contrast-ratio-gray" href="/impressum">impressum</x-link></p>@endif
-            @if(request()->route()->uri() != 'privacy-policy')<p class="underline"><x-link class="contrast-ratio-gray" href="/privacy-policy">privacy policy</x-link></p>@endif
+            @if(request()->route()->uri() != 'impressum')<p><x-link class="contrast-ratio-gray underline" href="/impressum">impressum</x-link></p>@endif
+            @if(request()->route()->uri() != 'privacy-policy')<p><x-link class="contrast-ratio-gray underline" href="/privacy-policy">privacy policy</x-link></p>@endif
         </div>
     </div>
 </footer>

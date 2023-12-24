@@ -7,10 +7,12 @@
             @if (request('tag'))
                 <input type="hidden" name="tag" value="{{ request('tag') }}">
             @endif
+            <label for="search" class="pr-2">search content</label>
             <input 
                 class="bg-transparent placeholder-black font-semibold text-sm focus:outline-none focus:ring"
+                id="search"
                 name="search" 
-                placeholder="search content"
+                placeholder=""
                 type="text" 
                 value="{{ request('search') }}">
         </form>
