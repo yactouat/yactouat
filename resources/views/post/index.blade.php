@@ -4,10 +4,10 @@
 
 @section('meta')
     @php
-        $description = "home of yactouat.com, the developer website and blog of Yacine Touati about AI, software development, and tech in general!";
+        $description = "home of yactouat.com, the developer website and blog of Yacine Touati. All about futurism, problem solving, tech, AI, software engineering, and web development!";
     @endphp
     <meta name="description" content="{{ $description }}">
-    <meta name="keywords" content="software, AI, developer, blog, tech">
+    <meta name="keywords" content="optimistic futurist, problem solving, tech, AI, software engineering, web development">
     <!-- OpenGraph Tags -->
     <meta property="og:title" content="yactouat.com | blog">
     <meta property="og:type" content="website">
@@ -28,7 +28,7 @@
     </div>
 
     <div class="mb-8">
-        <p class="text-gray-600">I'm a generalist software developer who is driven by curiosity, positivity, and a can-do attitude; I like to design full stack solutions with various technologies, my objective is to solve problems with code</p>
+        <p class="text-gray-600">I'm a software developer and an optimistic futurist. I am passionate about problem solving, tech, AI, software engineering, and web development.</p>
     </div>
 
     <div class="text-center mb-8">

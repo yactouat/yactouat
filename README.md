@@ -1,5 +1,5 @@
 # yactouat
 
-It's 30 past midnight and I have to work tomorrow. I'm not going to write a README now. I'll do it later. I promise.
+I'm a software developer and an optimistic futurist. I am passionate about problem solving, tech, AI, software engineering, and web development.
 
-In the meantime, you can go to [yactouat.com](https://yactouat.com) to see what this repo is all about.
+This Readme repo also contains the code for my website: https://yactouat.com.

@@ -7,7 +7,7 @@
         $description = "forgot password for your yactouat.com account ? don't worry, we got you covered!";
     @endphp
     <meta name="description" content="{{ $description }}">
-    <meta name="keywords" content="software, developer, blog, tech, account">
+    <meta name="keywords" content="blog, account">
     <!-- OpenGraph Tags -->
     <meta property="og:title" content="yactouat.com | forgot password">
     <meta property="og:type" content="website">

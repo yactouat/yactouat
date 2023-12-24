@@ -1,5 +1,5 @@
 ---
-excerpt: with the emergence of large multi modal models such as GPT-4 Vision or Gemini, which has multi-modality as its core, and also other open-source multi-modal models like Llava, it is important to understand how to use these models in practice. In this post, we will explore how  to do that.
+excerpt: with the emergence of large multi modal models such as GPT-4 Vision or Gemini, which has multi-modality as its core, and also other open-source multi-modal models like Llava, it is important to understand how to use these models in practice. In this post, we will explore how  to do that
 is_published: false
 tags: [embeddings, lmms, ai, computer-vision]
 thumbnail_ai_generated: true

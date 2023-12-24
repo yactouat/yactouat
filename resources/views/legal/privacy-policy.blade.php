@@ -4,7 +4,7 @@
 
 @section('meta')
     <meta name="description" content="privacy policy of yactouat.com">
-    <meta name="keywords" content="legal, privacy-policy">
+    <meta name="keywords" content="legal, privacy policy">
     <!-- OpenGraph Tags -->
     <meta property="og:title" content="yactouat.com | privacy policy">
     <meta property="og:type" content="website">
