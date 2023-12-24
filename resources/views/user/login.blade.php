@@ -40,7 +40,7 @@
                 </div>
             </form>
             <x-small>
-                <x-link href="/forgot-password">forgot password?</x-link>
+                <x-link href="/forgot-password" class="contrast-ratio-gray">forgot password?</x-link>
             </x-small>
         </x-panel>
     </section>

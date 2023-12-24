@@ -4,6 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.contrast-ratio-gray {
+    color: #444851;
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -110,8 +114,4 @@ img {
 
 .post-comments {
     align-items: end;
-}
-
-.footer-link {
-    color: #444851;
 }

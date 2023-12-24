@@ -45,7 +45,7 @@
         >
             <p>thank your for having subscribed to my newsletter <i class="fa-regular fa-face-smile"></i></p>
         </div>
-    @else
+    @elseif(auth()->user())
         <div 
             class="bg-gray-100 border border-gray-400 border-opacity-5 rounded-xl text-center py-16 px-10 mt-16"
             id="footer-newsletter"
@@ -96,7 +96,9 @@
                 <x-ai-generated-illustration />
             </div>
         </div>
-    @endauth
+    @else
+        <x-register-login-cta>subscribe to the newsletter</x-register-login-cta>  
+    @endif
 
     <div
         class="bg-gray-200 border border-gray-400 border-opacity-5 rounded-xl text-center py-16 mt-16 space-y-4"
@@ -104,8 +106,8 @@
         <p>&copy; Yacine Touati</p>
         <x-button type="button" data-cc="c-settings">Manage cookie settings</x-button>
         <div class="flex justify-center items-center space-x-2">
-            @if(request()->route()->uri() != 'impressum')<p class="underline"><x-link class="footer-link" href="/impressum">impressum</x-link></p>@endif
-            @if(request()->route()->uri() != 'privacy-policy')<p class="underline"><x-link class="footer-link" href="/privacy-policy">privacy policy</x-link></p>@endif
+            @if(request()->route()->uri() != 'impressum')<p class="underline"><x-link class="contrast-ratio-gray" href="/impressum">impressum</x-link></p>@endif
+            @if(request()->route()->uri() != 'privacy-policy')<p class="underline"><x-link class="contrast-ratio-gray" href="/privacy-policy">privacy policy</x-link></p>@endif
         </div>
     </div>
 </footer>
