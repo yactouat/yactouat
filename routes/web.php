@@ -5,6 +5,7 @@ use App\Http\Controllers\PostCommentsController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AllowsOnlyAdmin;
+use App\Services\SystemStatusService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Route;
@@ -56,7 +57,12 @@ Route::get('privacy-policy', function () {
     return view('legal.privacy-policy');
 });
 
-// tests
+// admin
+Route::get("systems-status", function() {
+    return view('admin.systems-status', [
+        'systemsStatus' => SystemStatusService::resolve()
+    ]);
+})->middleware(AllowsOnlyAdmin::class);
 // Route::get('test-start', function (Request $request) {
 //     $unsubscribeUrl = resolve('SignedRouteService')->persist(1, 'show', 'test', '/test-end');
 //     dd(resolve('SignedRouteService')->makeUrl($unsubscribeUrl));
