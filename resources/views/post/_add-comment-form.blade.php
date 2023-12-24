@@ -27,5 +27,6 @@
         </script>
     @endif
 @else
+    <h2>comments</h2>
     <x-register-login-cta>post a comment</x-register-login-cta>
 @endauth

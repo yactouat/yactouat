@@ -31,7 +31,10 @@
             </section>
         </div>
     @else
-        <x-register-login-cta>write me a message</x-register-login-cta>  
+        <div class="text-center">
+            <h2 class="text-center font-bold text-xl">contact me</h2>
+            <x-register-login-cta>write me a message</x-register-login-cta> 
+        </div>
     @endauth
 </section>
 

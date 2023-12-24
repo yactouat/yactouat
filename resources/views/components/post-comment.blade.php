@@ -2,7 +2,6 @@
 
 <x-panel
     class="lg:w-full bg-gray-200"
-    id="post-comments"
 >
     <article class="flex space-x-4">
         <div

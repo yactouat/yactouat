@@ -25,8 +25,8 @@
 
         <hr class="my-8">
 
-        <h2 class="text-lg font-semibold mt-6 mb-2">Purpose of this policy</h2>
         <section>
+            <h2 class="text-lg font-semibold mt-6 mb-2">Purpose of this policy</h2>
             <p>Your privacy is critically important to us. At yactouat.com, we have a few fundamental principles:</p>
             <ul>
                 <li>We are committed to safeguarding the privacy of our website visitors and service users.</li>
@@ -39,8 +39,8 @@
 
         <hr class="my-8">
 
-        <h2 class="text-lg font-semibold mt-6 mb-2">Information collection</h2>
         <section>
+            <h2 class="text-lg font-semibold mt-6 mb-2">Information collection</h2>
             <p>At yactouat.com, we collect various types of information for several purposes to provide and improve our service to you. The types of data we collect are as follows:</p>
             <ul>
                 <li>Personal identifiable information ("Personal data"), may include but is no limited to: email address, name, cookies and usage data.</li>
@@ -52,8 +52,8 @@
 
         <hr class="my-8">
 
-        <h2 class="text-lg font-semibold mt-6 mb-2">Use of information</h2>
         <section>
+            <h2 class="text-lg font-semibold mt-6 mb-2">Use of information</h2>
             <p>The information we collect serves various purposes in enhancing your experience on yactouat.com. We use the collected data for several specific purposes:</p>
             <ul>
                 <li>To Provide and Maintain our Service: Using the information helps us ensure that our blog is functioning correctly and allows us to make necessary improvements. This includes not only the technical aspects but also content and feature updates.</li>
@@ -70,8 +70,8 @@
 
         <hr class="my-8">
 
-        <h2 class="text-lg font-semibold mt-6 mb-2">Cookies and tracking technologies</h2>
         <section>
+            <h2 class="text-lg font-semibold mt-6 mb-2">Cookies and tracking technologies</h2>
             <p>These are the cookies and tracking technologies we use on this website:</p>
             <ul>
                 <li>PHP sessions (server-side) to keep your authentication state up. You can un authenticate at any time directly in yactouat.com.</li>
@@ -83,8 +83,8 @@
 
         <hr class="my-8">
 
-        <h2 class="text-lg font-semibold mt-6 mb-2">Data security</h2>
         <section>
+            <h2 class="text-lg font-semibold mt-6 mb-2">Data security</h2>
             <p>These are the measures we take to ensure that your personal data is safe:</p>
             <ul>
                 <li>We encrypt your user password.</li>
@@ -97,8 +97,8 @@
 
         <hr class="my-8">
 
-        <h2 class="text-lg font-semibold mt-6 mb-2">User rights</h2>
         <section>
+            <h2 class="text-lg font-semibold mt-6 mb-2">User rights</h2>
             <p>These are your rights as a user of this site:</p>
             <ul>
                 <li>You can update your personal information by going to your profile page.</li>
@@ -111,14 +111,17 @@
 
         <hr class="my-8">
 
-        <h2 class="text-lg font-semibold mt-6 mb-2">Changes to the privacy policy</h2>
         <section>
+            <h2 class="text-lg font-semibold mt-6 mb-2">Changes to the privacy policy</h2>
             <p>Should this privacy policy terms change, users will be notified by email and/or a notice on our blog. You are advised to review this privacy policy periodically for any changes. Changes to this privacy policy are effective when they are posted on this page.</p>
         </section>
 
         <hr class="my-8">
 
-        <h2 class="text-lg font-semibold mt-6 mb-2">Contact Information</h2>
-        <p>Email: <a href="mailto:{{ config('mail.reply_to.address') }}" class="text-gray-500 underline">{{ config("mail.reply_to.address") }}</a></p>
+        <section>
+            <h2 class="text-lg font-semibold mt-6 mb-2">Contact Information</h2>
+            <p>Email: <a href="mailto:{{ config('mail.reply_to.address') }}" class="text-gray-500 underline">{{ config("mail.reply_to.address") }}</a></p>
+        </section>
+
     </div>    
 @endsection
