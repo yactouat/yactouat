@@ -24,8 +24,7 @@
     sudo ufw delete allow OpenSSH
     sudo ufw allow PORT/tcp
     sudo systemctl restart ssh
-
-    # as `postgres` (PostgreSQL should have been installed via CI/CD pipeline at this point)
+    apt install -y postgresql php libapache2-mod-php curl git libpq-dev unzip wget zip
     su postgres
     cd ~ 
     psql -U postgres
@@ -43,11 +42,14 @@
     systemctl restart apache2
     sudo chown -R $USER:$USER /var/www/html
     sudo nano /etc/apache2/sites-available/yactouat.com.conf # copy the contents of `Docker/conf/apache.conf`
+    sudo a2enmod rewrite
+    sudo a2enmode headers
     sudo a2ensite yactouat.com
+    sudo a2dissite 000-default
     cd /var/www/html && rm index.html
 
     # from local machine
-    ssh-copy-id yactouat@HOST # then check in ~/.ssh/authorized_keys what keys you want to keep in there
+    ssh-copy-id -p PORT yactouat@HOST # then check in ~/.ssh/authorized_keys what keys you want to keep in there
     scp -P PORT gcp-storage-creds.json yactouat@IP:/var/www/html/
 ```
 
