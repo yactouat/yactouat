@@ -126,6 +126,7 @@ jobs:
 
   set-permissions-after-deploy:
     name: set-permissions-after-deploy
+    needs: deploy-app
     runs-on: ubuntu-latest
     steps:
     - name: setting permissions on remote host after deploy

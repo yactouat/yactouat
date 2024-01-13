@@ -68,15 +68,6 @@ Pushing to the main branch will trigger a Google Cloud Run revision deployment (
     sudo a2ensite yactouat.com
     sudo a2dissite 000-default
     cd /var/www/html && rm index.html
-    # once the app' is deployed
-    cd /var/www/html
-    sudo chown -R $USER:www-data .
-    # find files then change permissions to "read and write" for owner and group, and "read" for others
-    sudo find . -type f -exec chmod 664 {} \; 
-    # find directories then change permissions to "read, write and execute" for owner and group, and "read and execute" for others
-    sudo find . -type d -exec chmod 775 {} \;
-    sudo chgrp -R www-data storage bootstrap/cache
-    sudo chmod -R ug+rwx storage bootstrap/cache
 
     # from local machine
     ssh-copy-id -p PORT yactouat@HOST # then check in ~/.ssh/authorized_keys what keys you want to keep in there
