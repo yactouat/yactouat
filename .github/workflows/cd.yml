@@ -23,7 +23,7 @@ jobs:
             systemd-tmpfiles --create --remove --clean
             apt update -y
             apt upgrade -y
-            apt install -y postgresql
+            apt install -y postgresql php libapache2-mod-php curl git libpq-dev unzip wget zip
             apt autoremove
             systemctl restart postgresql.service
             sleep 5
