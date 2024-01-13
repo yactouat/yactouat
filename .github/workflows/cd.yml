@@ -24,6 +24,8 @@ jobs:
             apt update -y
             apt upgrade -y
             apt install -y postgresql php libapache2-mod-php curl git libpq-dev unzip wget zip
+            apt install php8.1-pgsql
+            systemctl restart apache2
             apt autoremove
             systemctl restart postgresql.service
             sleep 5

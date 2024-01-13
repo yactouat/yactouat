@@ -25,18 +25,20 @@
     sudo ufw allow PORT/tcp
     sudo systemctl restart ssh
 
-    <!-- TODO install Apache part -->
-    sudo apt update && sudo apt upgrade -y
-    sudo apt install apache2 -y
-    sudo ufw allow in 'Apache Full'
-    # you should be able to navigate to the IP using plan HTTP and see the Apache default page
-
     # as `postgres` (PostgreSQL should have been installed via CI/CD pipeline at this point)
     su postgres
     cd ~ 
     psql -U postgres
     ALTER USER postgres WITH ENCRYPTED PASSWORD 'PASSWORD';
     CREATE SCHEMA public; # may already exist
+
+    # as `yactouat`
+    <!-- TODO install Apache part -->
+    sudo apt update && sudo apt upgrade -y
+    sudo apt install apache2 -y
+    sudo ufw allow in 'Apache Full'
+    # you should be able to navigate to the IP using plan HTTP and see the Apache default page
+    phpenmod pdo_pgsql
 
     # from local machine
     ssh-copy-id yactouat@HOST # then check in ~/.ssh/authorized_keys what keys you want to keep in there
