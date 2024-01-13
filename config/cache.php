@@ -78,6 +78,7 @@ return [
             'driver' => 'redis',
             'connection' => 'localhost',
             'lock_connection' => 'default',
+            'scheme' => 'tcp'
         ],
 
         'dynamodb' => [

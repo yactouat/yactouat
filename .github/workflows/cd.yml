@@ -125,4 +125,5 @@ jobs:
             php -r "unlink('composer-setup.php');"
             php composer.phar install --no-dev
             rm composer.phar
+            php artisan config:clear
             php artisan migrate --force && php artisan db:seed --force && php ./scripts/clear-cache.php
