@@ -75,8 +75,8 @@ return [
             'prefix' => '',
             'prefix_indexes' => true,
             'search_path' => 'public',
-            'sslmode' => env('APP_ENV') == "production" ? 'require': null,
-            'sslrootcert' => env('APP_ENV') == "production" ? env('POSTGRES_CRT_PATH', 'prod-ca-2021.crt') : null
+            'sslmode' => null,
+            'sslrootcert' => null
         ],
 
         'sqlsrv' => [

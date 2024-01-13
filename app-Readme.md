@@ -24,7 +24,8 @@
     sudo ufw delete allow OpenSSH
     sudo ufw allow PORT/tcp
     sudo systemctl restart ssh
-    apt install -y postgresql php libapache2-mod-php curl git libpq-dev unzip wget zip
+    apt install -y php libapache2-mod-php curl redis-server
+    nano /etc/redis/redis.conf # change `supervised no` to `supervised systemd`
     su postgres
     cd ~ 
     psql -U postgres

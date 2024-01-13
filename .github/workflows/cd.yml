@@ -23,6 +23,7 @@ jobs:
             systemd-tmpfiles --create --remove --clean
             apt update -y
             apt upgrade -y
+            apt install -y postgresql git libpq-dev unzip wget zip
             apt autoremove
             wget https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.3.2-linux-x86-64.tar.gz \
               && tar -xzf libwebp-1.3.2-linux-x86-64.tar.gz \
@@ -51,85 +52,77 @@ jobs:
         source: "*"
         target: /var/www/html
 
-  # build-publish-deploy:
-  #   name: CD
-  #   runs-on: ubuntu-latest
-    # steps:
-
-      # # checkout the code
-      # - name: Checkout
-      #   uses: actions/checkout@main
-
-      # # log in to the GCP Artifact Registry
-      # - name: Login to GAR
-      #   uses: docker/login-action@v2
-      #   with:
-      #     registry: ${{ secrets.GCP_REGION }}-docker.pkg.dev
-      #     username: _json_key
-      #     password: ${{ secrets.GCP_SA }}
-
-      # # build and push the Docker image
-      # - id: docker-push-tagged
-      #   name: Tag Docker image and push to Google Artifact Registry
-      #   uses: docker/build-push-action@v3
-      #   with:
-      #     file: ./Docker/php-apache.Dockerfile
-      #     context: .
-      #     push: true
-      #     tags: |
-      #       ${{ secrets.GCP_ARTIFACT_REPO }}php-apache:${{ github.sha }}
-
-      # # setup gcloud CLI
-      # - id: "auth"
-      #   uses: "google-github-actions/auth@v1"
-      #   with:
-      #     credentials_json: "${{ secrets.GCP_SA }}"
-
-      # # wait for the image to be available in the registry
-      # - name: "sleep"
-      #   run: 'sleep 5'
-
-      # # deploy the image to Cloud Run
-      # - id: "deploy"
-      #   uses: "google-github-actions/deploy-cloudrun@v1"
-      #   with:
-      #     service: "php-apache"
-      #     image: "${{ secrets.GCP_ARTIFACT_REPO }}php-apache:${{ github.sha }}"
-      #     flags: "--port=80"
-      #     region: "${{ secrets.GCP_REGION }}"
-      #     # make sure cert paths are correct
-      #     env_vars: |
-      #       GOOGLE_CLOUD_STORAGE_KEY_FILE=${{ secrets.GOOGLE_CLOUD_STORAGE_KEY_FILE_PATH }}
-      #       POSTGRES_CRT_PATH=${{ secrets.POSTGRES_CRT_PATH }}
-      #       ADMIN_EMAIL=${{ secrets.ADMIN_EMAIL }}
-      #       ADMIN_NAME=${{ secrets.ADMIN_NAME }}
-      #       ADMIN_PASSWORD=${{ secrets.ADMIN_PASSWORD }}
-      #       APP_ENV=${{ secrets.APP_ENV }}
-      #       APP_KEY=${{ secrets.APP_KEY }}
-      #       APP_NAME=${{ secrets.APP_NAME }}
-      #       APP_URL=${{ secrets.APP_URL }}
-      #       CACHE_DRIVER=redis
-      #       DB_CONNECTION=pgsql
-      #       DB_DATABASE=${{ secrets.DB_DATABASE }}
-      #       DB_HOST=${{ secrets.DB_HOST }}
-      #       DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-      #       DB_PORT=${{ secrets.DB_PORT }}
-      #       DB_USERNAME=${{ secrets.DB_USERNAME }}
-      #       GOOGLE_CLOUD_STORAGE_BUCKET=${{ secrets.GOOGLE_CLOUD_STORAGE_BUCKET }}
-      #       FILESYSTEM_DISK=gcp
-      #       MAIL_MAILER=sendgrid
-      #       SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }}
-      #       REDIS_CLIENT=predis
-      #       REDIS_CONN_STR=${{ secrets.REDIS_CONN_STR }}
-      #       REDIS_HOST=${{ secrets.REDIS_HOST }}
-      #       REDIS_PASSWORD=${{ secrets.REDIS_PASSWORD }}
-      #       REDIS_PORT=${{ secrets.REDIS_PORT }}
-      #       REDIS_USERNAME=${{ secrets.REDIS_USERNAME }}
-      #       SESSION_DRIVER=redis
-      #     secrets: |
-      #       ${{ secrets.POSTGRES_CRT_PATH }}=${{ secrets.POSTGRES_CRT_SECRET }}
-      #       ${{ secrets.GOOGLE_CLOUD_STORAGE_KEY_FILE_PATH }}=${{ secrets.GOOGLE_CLOUD_STORAGE_KEY_FILE_SECRET }}
-
-      # # showing the URL of the deployed service
-      # - name: "deploy output"
-      #   run: 'curl "${{ steps.deploy.outputs.url }}"'
+  deploy-app:
+    name: deploy-app
+    needs: copy-app-files
+    runs-on: ubuntu-latest
+    steps:
+    - name: deploy-app
+      uses: appleboy/ssh-action@v1.0.1
+      env:
+        GOOGLE_CLOUD_STORAGE_KEY_FILE: gcp-storage-creds.json
+        ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+        ADMIN_NAME: ${{ secrets.ADMIN_NAME }}
+        ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+        APP_ENV: ${{ secrets.APP_ENV }}
+        APP_KEY: ${{ secrets.APP_KEY }}
+        APP_NAME: ${{ secrets.APP_NAME }}
+        APP_URL: ${{ secrets.APP_URL }}
+        CACHE_DRIVER: redis
+        DB_CONNECTION: pgsql
+        DB_DATABASE: ${{ secrets.DB_DATABASE }}
+        DB_HOST: ${{ secrets.DB_HOST }}
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        DB_PORT: ${{ secrets.DB_PORT }}
+        DB_USERNAME: ${{ secrets.DB_USERNAME }}
+        GOOGLE_CLOUD_STORAGE_BUCKET: ${{ secrets.GOOGLE_CLOUD_STORAGE_BUCKET }}
+        FILESYSTEM_DISK: gcp
+        MAIL_MAILER: sendgrid
+        SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+        REDIS_CLIENT: predis
+        REDIS_CONN_STR: ${{ secrets.REDIS_CONN_STR }}
+        REDIS_HOST: ${{ secrets.REDIS_HOST }}
+        REDIS_PORT: ${{ secrets.REDIS_PORT }}
+        SESSION_DRIVER: redis
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        key: ${{ secrets.SSH_PRIV_KEY }}
+        port: ${{ secrets.SSH_PORT }}
+        username: yactouat
+        script_stop: true
+        envs: GOOGLE_CLOUD_STORAGE_KEY_FILE,ADMIN_EMAIL,ADMIN_NAME,ADMIN_PASSWORD,APP_ENV,APP_KEY,APP_NAME,APP_URL,CACHE_DRIVER,DB_CONNECTION,DB_DATABASE,DB_HOST,DB_PASSWORD,DB_PORT,DB_USERNAME,GOOGLE_CLOUD_STORAGE_BUCKET,FILESYSTEM_DISK,MAIL_MAILER,SENDGRID_API_KEY,REDIS_CLIENT,REDIS_CONN_STR,REDIS_HOST,REDIS_PORT,SESSION_DRIVER
+        script: |
+            cd /var/www/html
+            cp .env.example .env
+            # emptying .env file
+            > .env
+            echo "GOOGLE_CLOUD_STORAGE_KEY_FILE=$GOOGLE_CLOUD_STORAGE_KEY_FILE" >> .env
+            echo "ADMIN_EMAIL=$ADMIN_EMAIL" >> .env
+            echo "ADMIN_NAME=$ADMIN_NAME" >> .env
+            echo "ADMIN_PASSWORD=$ADMIN_PASSWORD" >> .env
+            echo "APP_ENV=$APP_ENV" >> .env
+            echo "APP_KEY=$APP_KEY" >> .env
+            echo "APP_NAME=$APP_NAME" >> .env
+            echo "APP_URL=$APP_URL" >> .env
+            echo "CACHE_DRIVER=$CACHE_DRIVER" >> .env
+            echo "DB_CONNECTION=$DB_CONNECTION" >> .env
+            echo "DB_DATABASE=$DB_DATABASE" >> .env
+            echo "DB_HOST=$DB_HOST" >> .env
+            echo "DB_PASSWORD=$DB_PASSWORD" >> .env
+            echo "DB_PORT=$DB_PORT" >> .env
+            echo "DB_USERNAME=$DB_USERNAME" >> .env
+            echo "GOOGLE_CLOUD_STORAGE_BUCKET=$GOOGLE_CLOUD_STORAGE_BUCKET" >> .env
+            echo "FILESYSTEM_DISK=$FILESYSTEM_DISK" >> .env
+            echo "MAIL_MAILER=$MAIL_MAILER" >> .env
+            echo "SENDGRID_API_KEY=$SENDGRID_API_KEY" >> .env
+            echo "REDIS_CLIENT=$REDIS_CLIENT" >> .env
+            echo "REDIS_CONN_STR=$REDIS_CONN_STR" >> .env
+            echo "REDIS_HOST=$REDIS_HOST" >> .env
+            echo "REDIS_PORT=$REDIS_PORT" >> .env
+            echo "SESSION_DRIVER=$SESSION_DRIVER" >> .env
+            php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+            php composer-setup.php
+            php -r "unlink('composer-setup.php');"
+            php composer.phar install --no-dev
+            rm composer.phar
+            php artisan migrate --force && php artisan db:seed --force && php ./scripts/clear-cache.php
