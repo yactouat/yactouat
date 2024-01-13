@@ -75,6 +75,7 @@ return [
         ],
 
         'redis' => [
+            'driver' => 'redis',
             'client' => 'predis',
             'cluster' => env('REDIS_CLUSTER', false),
     
