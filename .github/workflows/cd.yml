@@ -24,6 +24,12 @@ jobs:
             apt update -y
             apt upgrade -y
             apt autoremove
+            wget https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.3.2-linux-x86-64.tar.gz \
+              && tar -xzf libwebp-1.3.2-linux-x86-64.tar.gz \
+              && cp libwebp-1.3.2-linux-x86-64/bin/dwebp /usr/local/bin/dwebp \
+              && cp libwebp-1.3.2-linux-x86-64/bin/cwebp /usr/local/bin/cwebp \
+              && rm -rf libwebp-1.3.2-linux-x86-64 \
+              && rm libwebp-1.3.2-linux-x86-64.tar.gz
             systemctl restart postgresql.service
             sleep 5
 
