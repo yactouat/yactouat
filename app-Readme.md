@@ -24,7 +24,7 @@
     sudo ufw delete allow OpenSSH
     sudo ufw allow PORT/tcp
     sudo systemctl restart ssh
-    apt install -y php libapache2-mod-php curl redis-server
+    apt install -y php libapache2-mod-php curl redis-server php-curl php-xml php-mbstring
     nano /etc/redis/redis.conf # change `supervised no` to `supervised systemd`
     su postgres
     cd ~ 
