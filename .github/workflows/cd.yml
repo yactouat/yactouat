@@ -88,7 +88,7 @@ jobs:
         port: ${{ secrets.SSH_PORT }}
         username: yactouat
         script_stop: true
-        envs: GOOGLE_CLOUD_STORAGE_KEY_FILE,ADMIN_EMAIL,ADMIN_NAME,ADMIN_PASSWORD,APP_ENV,APP_KEY,APP_NAME,APP_URL,CACHE_DRIVER,DB_CONNECTION,DB_DATABASE,DB_HOST,DB_PASSWORD,DB_PORT,DB_USERNAME,GOOGLE_CLOUD_STORAGE_BUCKET,FILESYSTEM_DISK,MAIL_MAILER,SENDGRID_API_KEY,REDIS_CLIENT,REDIS_CONN_STR,REDIS_HOST,REDIS_PORT,SESSION_DRIVER
+        envs: GOOGLE_CLOUD_STORAGE_KEY_FILE,ADMIN_EMAIL,ADMIN_NAME,ADMIN_PASSWORD,APP_ENV,APP_KEY,APP_NAME,APP_URL,CACHE_DRIVER,DB_CONNECTION,DB_DATABASE,DB_HOST,DB_PASSWORD,DB_PORT,DB_USERNAME,GOOGLE_CLOUD_STORAGE_BUCKET,FILESYSTEM_DISK,MAIL_MAILER,SENDGRID_API_KEY,REDIS_CLIENT,REDIS_CONN_STR,SESSION_DRIVER
         script: |
             cd /var/www/html
             cp .env.example .env
@@ -115,8 +115,6 @@ jobs:
             echo "SENDGRID_API_KEY=$SENDGRID_API_KEY" >> .env
             echo "REDIS_CLIENT=$REDIS_CLIENT" >> .env
             echo "REDIS_CONN_STR=$REDIS_CONN_STR" >> .env
-            echo "REDIS_HOST=$REDIS_HOST" >> .env
-            echo "REDIS_PORT=$REDIS_PORT" >> .env
             echo "SESSION_DRIVER=$SESSION_DRIVER" >> .env
             php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
             php composer-setup.php
