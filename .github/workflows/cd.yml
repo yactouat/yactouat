@@ -81,8 +81,6 @@ jobs:
         SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
         REDIS_CLIENT: predis
         REDIS_CONN_STR: ${{ secrets.REDIS_CONN_STR }}
-        REDIS_HOST: ${{ secrets.REDIS_HOST }}
-        REDIS_PORT: ${{ secrets.REDIS_PORT }}
         SESSION_DRIVER: redis
       with:
         host: ${{ secrets.SSH_HOST }}
