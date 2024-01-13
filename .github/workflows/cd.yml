@@ -123,3 +123,27 @@ jobs:
             rm composer.phar
             php artisan config:clear
             php artisan migrate --force && php artisan db:seed --force && php ./scripts/clear-cache.php
+
+  set-permissions-after-deploy:
+    name: set-permissions-after-deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: setting permissions on remote host after deploy
+      uses: appleboy/ssh-action@v1.0.1
+      env:
+        DEBIAN_FRONTEND: "noninteractive"
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        key: ${{ secrets.SSH_PRIV_KEY }}
+        port: ${{ secrets.SSH_PORT }}
+        username: root
+        script_stop: true
+        script: |
+          cd /var/www/html
+          chown -R yactouat:www-data .
+          # find files then change permissions to "read and write" for owner and group, and "read" for others
+          find . -type f -exec chmod 664 {} \; 
+          # find directories then change permissions to "read, write and execute" for owner and group, and "read and execute" for others
+          find . -type d -exec chmod 775 {} \;
+          chgrp -R www-data storage bootstrap/cache
+          chmod -R ug+rwx storage bootstrap/cache
