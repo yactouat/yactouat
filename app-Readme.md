@@ -38,7 +38,13 @@
     sudo apt install apache2 -y
     sudo ufw allow in 'Apache Full'
     # you should be able to navigate to the IP using plan HTTP and see the Apache default page
+    apt install php8.1-pgsql
     phpenmod pdo_pgsql
+    systemctl restart apache2
+    sudo chown -R $USER:$USER /var/www/html
+    sudo nano /etc/apache2/sites-available/yactouat.com.conf # copy the contents of `Docker/conf/apache.conf`
+    sudo a2ensite yactouat.com
+    cd /var/www/html && rm index.html
 
     # from local machine
     ssh-copy-id yactouat@HOST # then check in ~/.ssh/authorized_keys what keys you want to keep in there

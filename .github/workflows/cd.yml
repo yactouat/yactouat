@@ -24,11 +24,27 @@ jobs:
             apt update -y
             apt upgrade -y
             apt install -y postgresql php libapache2-mod-php curl git libpq-dev unzip wget zip
-            apt install php8.1-pgsql
-            systemctl restart apache2
             apt autoremove
             systemctl restart postgresql.service
             sleep 5
+
+  # ! from here on make sure you ran all admin commands on the server beforehand
+
+  copy-app-files:
+    name: copy-app-files
+    needs: prep-sys-deps
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: copy PHP app' files via ssh key
+      uses: appleboy/scp-action@v0.1.6
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        key: ${{ secrets.SSH_PRIV_KEY }}
+        port: ${{ secrets.SSH_PORT }}
+        username: yactouat
+        source: "*"
+        target: /var/www/html
 
   # build-publish-deploy:
   #   name: CD
