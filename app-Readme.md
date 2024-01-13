@@ -1,0 +1,46 @@
+# yactouat.com app' readme
+
+
+## Pre requisites
+
+- a GCP project with billing and Cloud Storage enabled:
+    - with a bucket
+    - a SA with a JSON credentials key named `gcp-storage-creds.json` at the root of the repo
+    - the SA must have role 'Storage Object User'
+
+## CI / CD
+
+- for the deployment of this app', a VPS is provisioned running Ubuntu 22.04
+- run at least once on remote server, in this order =>
+
+```bash
+    # as `root`
+    adduser yactouat
+    usermod -aG sudo yactouat
+    ufw allow OpenSSH
+    ufw enable
+    sudo nano /etc/ssh/sshd_config # change port to whatever you want, don't forget to update repo secrets
+    # ! at this point, your SSH key should have been registered in the remote server
+    sudo ufw delete allow OpenSSH
+    sudo ufw allow PORT/tcp
+    sudo systemctl restart ssh
+
+    <!-- TODO install Apache part -->
+    sudo apt update && sudo apt upgrade -y
+    sudo apt install apache2 -y
+    sudo ufw allow in 'Apache Full'
+    # you should be able to navigate to http://IP and see the Apache default page
+
+    # as `postgres` (PostgreSQL should have been installed via CI/CD pipeline at this point)
+    su postgres
+    cd ~ 
+    psql -U postgres
+    ALTER USER postgres WITH ENCRYPTED PASSWORD 'PASSWORD';
+    CREATE SCHEMA public;
+
+    # from local machine
+    ssh-copy-id yactouat@HOST # then check in ~/.ssh/authorized_keys what keys you want to keep in there
+    scp -P PORT gcp-storage-creds.json yactouat@IP:/var/www/html/
+```
+
+- then updates are made via Github Actions (check out necessary secrets in repo settings by looking at the workflow files)
