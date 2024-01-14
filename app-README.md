@@ -68,6 +68,11 @@ Pushing to the main branch will trigger a Google Cloud Run revision deployment (
     sudo a2ensite yactouat.com
     sudo a2dissite 000-default
     cd /var/www/html && rm index.html
+    # once domain is up
+    sudo snap install --classic certbot
+    sudo ln -s /snap/bin/certbot /usr/bin/certbot
+    sudo certbot --apache -d yactouat.com -d www.yactouat.com
+    sudo certbot renew --dry-run
 
     # from local machine
     ssh-copy-id -p PORT yactouat@HOST # then check in ~/.ssh/authorized_keys what keys you want to keep in there

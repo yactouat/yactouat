@@ -23,7 +23,7 @@ services:
       - 5432:5432
 
   pgadmin:
-    image: dpage/pgadmin4:8.1
+    image: dpage/pgadmin4:8.2
     environment:
       PGADMIN_DEFAULT_EMAIL: yactouat@gmail.com
       PGADMIN_DEFAULT_PASSWORD: yactouat

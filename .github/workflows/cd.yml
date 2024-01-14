@@ -4,7 +4,6 @@ on:
     branches: ["dev/vps"]
 
 jobs:
-  # TODO update for VPS (repo steps in Dockerfile)
   prep-sys-deps:
     name: prep-sys-deps
     runs-on: ubuntu-latest
