@@ -1,4 +1,4 @@
 👋 I'm Yacine.
 
-I'm a software developer and an optimistic futurist. I am passionate about problem solving, tech, AI, software engineering, and web development.
+I'm a Software developer & optimistic futurist. Passionate about tech, AI, web dev, Culture. Building & teaching informational systems. 🚀
 
